@@ -6,10 +6,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class FollowPlayer : MonoBehaviour
 {
-    private GameObject target;
+    public GameObject target;
+    private NavMeshAgent agent;
+
+    private void Awake()
+    {
+        //animator = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
+        target = GameObject.FindGameObjectWithTag("Player");
+    }
 
     void Start()
     {
@@ -18,10 +27,23 @@ public class FollowPlayer : MonoBehaviour
 
     void Update()
     {
-        if (target == null)
+        target = GameObject.FindGameObjectWithTag("Player");
+
+        if (target != null)
         {
-            target = GameObject.FindGameObjectWithTag("Player");
-            return;
+            agent.destination = target.transform.position;
+
+            //if (distance < 1.5)
+            //{
+            //    agent.speed = 0;
+            //    animator.SetBool("IsWalking", false);
+            //}
+            //else
+            //{
+            //    agent.speed = speed;
+            //    agent.destination = target.transform.position;
+            //    animator.SetBool("IsWalking", true);
+            //}      
         }
 
     }
