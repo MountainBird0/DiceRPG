@@ -12,7 +12,7 @@ using UnityEngine;
 public class PoolData
 {
     public GameObject prefab;
-    public int Count;
+    public int count;
     public List<GameObject> list;
 }
 
@@ -38,7 +38,7 @@ public class ObjectPoolManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
         AddObjectToPool();
     }
 
@@ -49,7 +49,7 @@ public class ObjectPoolManager : MonoBehaviour
     {
         foreach (var pool in poolData)
         {
-            for (int i = 0; i < pool.Count; i++)
+            for (int i = 0; i < pool.count; i++)
             {
                 var Object = Instantiate(pool.prefab, transform);
                 pool.list.Add(Object);
@@ -60,7 +60,7 @@ public class ObjectPoolManager : MonoBehaviour
     }
 
     /**********************************************************
-    * 설명 : 외부에서 오브젝트를 가지고 옴
+    * 설명 : 외부에서 오브젝트를 가지고 감
      ***********************************************************/
     public GameObject GetObject(string prefabName)
     {
@@ -89,7 +89,5 @@ public class ObjectPoolManager : MonoBehaviour
         }
         return null;
     }
-
-
 
 }

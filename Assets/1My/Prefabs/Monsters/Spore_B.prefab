@@ -953,9 +953,13 @@ GameObject:
   - component: {fileID: 1987829073308266382}
   - component: {fileID: 308073039}
   - component: {fileID: 3077636860413263812}
+  - component: {fileID: -4093745394270899775}
+  - component: {fileID: 3339154480792556038}
+  - component: {fileID: 6092898993433194798}
+  - component: {fileID: -7757047790939266030}
   m_Layer: 0
   m_Name: Spore_B
-  m_TagString: Untagged
+  m_TagString: BattleMonster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1010,8 +1014,8 @@ Rigidbody:
   m_GameObject: {fileID: 8323697398093905092}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: Infinity
+  m_AngularDrag: Infinity
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -1066,6 +1070,56 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+--- !u!114 &-4093745394270899775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8323697398093905092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fd5e842649e36a4d8b017ba040439a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hpbar: {fileID: 713903505663753785}
+--- !u!114 &3339154480792556038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8323697398093905092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d998fc7b1ad30d4da47b51f951c893d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &6092898993433194798
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8323697398093905092}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 0.7}
+  m_Center: {x: 0, y: 0.5, z: 0.7}
+--- !u!114 &-7757047790939266030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8323697398093905092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd669ea560a9cac4f9f07cced13e0243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8434639278894562985
 GameObject:
   m_ObjectHideFlags: 0
@@ -1168,9 +1222,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8703318440238818942}
     m_Modifications:
+    - target: {fileID: 221507257297298757, guid: 003e43794f4eb0844907538e8e8a63a1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 221507257297298757, guid: 003e43794f4eb0844907538e8e8a63a1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 221507257297298757, guid: 003e43794f4eb0844907538e8e8a63a1, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2476932700735061390, guid: 003e43794f4eb0844907538e8e8a63a1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2523298436014982695, guid: 003e43794f4eb0844907538e8e8a63a1, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 3615704065209800882, guid: 003e43794f4eb0844907538e8e8a63a1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5979079138846998070, guid: 003e43794f4eb0844907538e8e8a63a1, type: 3}
       propertyPath: m_Pivot.x
@@ -1258,6 +1332,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 003e43794f4eb0844907538e8e8a63a1, type: 3}
+--- !u!1 &713903505663753785 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3615704065209800882, guid: 003e43794f4eb0844907538e8e8a63a1, type: 3}
+  m_PrefabInstance: {fileID: 4307064966776252043}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &7582988684104177853 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5979079138846998070, guid: 003e43794f4eb0844907538e8e8a63a1, type: 3}

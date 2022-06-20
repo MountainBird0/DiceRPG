@@ -30,5 +30,22 @@ public class PlayerCollision : MonoBehaviour
             Debug.Log($"[PlayerCollision] : 마을에서 {EnemyName}과 충돌");
             GameManager.instance.MoveBattleField();
         }
+
+        if(collision.collider.CompareTag("Portal"))
+        {
+            GameManager.instance.MoveTown();
+        }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("BattleMonster"))
+        {
+            LivingEntity life = other.GetComponent<LivingEntity>();
+            life.OnDamage(10, transform.position);
+        }
+
+    }
+
+
 }

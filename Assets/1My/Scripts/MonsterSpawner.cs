@@ -8,4 +8,12 @@ public class MonsterSpawner : MonoBehaviour
     {
         SpawnManager.instance.Spawning();
     }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SpawnManager.instance.Spawning();
+        }
+    }
 }

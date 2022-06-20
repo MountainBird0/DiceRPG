@@ -6,6 +6,9 @@ TagManager:
   tags:
   - TownMonster
   - SpawnPointMonster
+  - BattleMonster
+  - Portal
+  - Hpbar
   layers:
   - Default
   - TransparentFX

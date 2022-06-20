@@ -28,10 +28,17 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("씬에 두개 이상의 GameManager가 존재합니다!");
             Destroy(gameObject);
         }
+
+        ObjectPoolManager.instance.GetObject("Player");
     }
 
     public void MoveBattleField()
     {
         SceneManager.LoadScene("TestBattleField");
+    }
+
+    public void MoveTown()
+    {
+        SceneManager.LoadScene("TestTown");
     }
 }
