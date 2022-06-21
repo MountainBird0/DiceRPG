@@ -26,7 +26,7 @@ public class InputManager : MonoBehaviour
     {
         if (instance == null)
         { 
-            instance = this; // instance가 비어있다면(null) 그곳에 자기 자신을 할당
+            instance = this;
         }
         else
         {
@@ -40,7 +40,7 @@ public class InputManager : MonoBehaviour
     ***********************************************************/
     private void Update()
     {       
-        moveX = Input.GetAxis(moveXName);     // move에 관한 입력 감지      
+        moveX = Input.GetAxis(moveXName);     
         moveZ = -1 * Input.GetAxis(moveZName); 
     }
 

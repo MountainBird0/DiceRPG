@@ -6,6 +6,12 @@ TagManager:
   tags:
   - TownMonster
   - SpawnPointMonster
+  - BattleMonster
+  - Portal
+  - Hpbar
+  - EmptyZone
+  - StartPoint
+  - PlayerUI
   layers:
   - Default
   - TransparentFX

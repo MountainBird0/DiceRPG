@@ -5,9 +5,17 @@ using UnityEngine.UI;
 
 public class PlayerHealth : LivingEntity
 {
-
-    public void Awake()
+    private void Awake()
     {
-        
+        //Hpbar = GameObject.FindGameObjectWithTag("Hpbar");
+        //maxHealth = 100f;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            Debug.Log($"{maxHealth}, {currentHealth}");
+        }
     }
 }

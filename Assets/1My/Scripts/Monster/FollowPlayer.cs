@@ -10,24 +10,30 @@ using UnityEngine.AI;
 
 public class FollowPlayer : MonoBehaviour
 {
-    public GameObject target;
+    private GameObject target;
     private NavMeshAgent agent;
 
     private void Awake()
     {
         //animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
-        target = GameObject.FindGameObjectWithTag("Player");
+
     }
 
-    void Start()
+    private void Start()
     {
-        
+        target = GameObject.FindGameObjectWithTag("Player");
+        if (target != null)
+        {
+            Init();
+            Debug.Log($"[FollowPlayer] : 플레이어 찾음");
+
+        }
     }
 
     void Update()
     {
-        target = GameObject.FindGameObjectWithTag("Player");
+        //target = GameObject.FindGameObjectWithTag("Player");
 
         if (target != null)
         {
@@ -47,4 +53,10 @@ public class FollowPlayer : MonoBehaviour
         }
 
     }
+
+    private void Init()
+    {
+        agent.enabled = true;
+    }
+
 }
