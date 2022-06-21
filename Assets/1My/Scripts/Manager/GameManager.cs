@@ -29,16 +29,16 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        ObjectPoolManager.instance.GetObject("Player");
+        //ObjectPoolManager.instance.GetObject("Player");
     }
 
     public void MoveBattleField()
     {
-        SceneManager.LoadScene("TestBattleField");
+        SceneManager.LoadScene("BattleField1");
     }
 
     public void MoveTown()
     {
-        SceneManager.LoadScene("TestTown");
+        SceneManager.LoadScene("Town");
     }
 }

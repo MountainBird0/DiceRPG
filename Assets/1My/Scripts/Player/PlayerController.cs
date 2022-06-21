@@ -10,7 +10,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private float playerMoveSpeed = 4.0f;
-    private float gravity = 20.0f;
+    //private float gravity = 20.0f;
 
     private Rigidbody playerRigidbody;
     private Animator playerAnimator;
@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     ***********************************************************/
     private void Awake()
     {
-        //DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject);
 
         playerRigidbody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();

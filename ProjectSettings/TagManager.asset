@@ -9,6 +9,7 @@ TagManager:
   - BattleMonster
   - Portal
   - Hpbar
+  - EmptyZone
   layers:
   - Default
   - TransparentFX

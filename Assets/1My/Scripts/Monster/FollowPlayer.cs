@@ -10,27 +10,28 @@ using UnityEngine.AI;
 
 public class FollowPlayer : MonoBehaviour
 {
-    public GameObject target;
+    private GameObject target;
     private NavMeshAgent agent;
 
     private void Awake()
     {
         //animator = GetComponent<Animator>();
-        agent = GetComponent<NavMeshAgent>();
         target = GameObject.FindGameObjectWithTag("Player");
+        agent = GetComponent<NavMeshAgent>();
     }
 
-    void Start()
+    private void OnDisable()
     {
-        
+        agent.enabled = false;
     }
 
     void Update()
     {
-        target = GameObject.FindGameObjectWithTag("Player");
+        //target = GameObject.FindGameObjectWithTag("Player");
 
         if (target != null)
         {
+            Init();
             agent.destination = target.transform.position;
 
             //if (distance < 1.5)
@@ -46,5 +47,13 @@ public class FollowPlayer : MonoBehaviour
             //}      
         }
 
+    }
+
+    public void Init()
+    {
+        if(!agent.enabled)
+        {
+            agent.enabled = true;
+        }
     }
 }

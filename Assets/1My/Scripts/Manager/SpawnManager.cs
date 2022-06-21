@@ -40,10 +40,13 @@ public class SpawnManager : MonoBehaviour
     ***********************************************************/
     public void Spawning()
     {
+        Debug.Log($"[SpawnManager] : 소환시작");
         spawnPoints.Clear();
 
         foreach (var point in GameObject.FindGameObjectsWithTag("SpawnPointMonster"))
         {
+            Debug.Log($"[SpawnManager] : 스폰포인트 잡음");
+
             spawnPoints.Add(point);
         }
 
@@ -53,25 +56,15 @@ public class SpawnManager : MonoBehaviour
 
         }
 
+        Debug.Log($"[SpawnManager] : 소환할건{ObjectName}");
+
         for (int i = 0; i < spawnPoints.Count; i++)
         {
             var prefab = ObjectPoolManager.instance.GetObject(ObjectName);
-            prefab.transform.position =spawnPoints[i].gameObject.transform.position;
-            Debug.Log($"[SpawnManager] : {spawnPoints[i].gameObject.transform.position}소환");
+            prefab.transform.position =spawnPoints[i].transform.position;
+
+
+            Debug.Log($"[SpawnManager] : {spawnPoints[i].transform.position}소환");
         }
-    }
-
-
-    void Start()
-    {
-
-    }
-
-
-    void Update()
-    {
-
-
-
     }
 }

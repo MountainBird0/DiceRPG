@@ -726,6 +726,7 @@ GameObject:
   - component: {fileID: 7160255019519728218}
   - component: {fileID: 3872667782396215328}
   - component: {fileID: 1708122619}
+  - component: {fileID: 8524943644036271690}
   m_Layer: 0
   m_Name: Spore
   m_TagString: TownMonster
@@ -787,6 +788,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &8524943644036271690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7500048829645717728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64402e0975fe3b849940f62d156ffe30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7654656414101058712
 GameObject:
   m_ObjectHideFlags: 0

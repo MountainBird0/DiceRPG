@@ -109,6 +109,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EmptyZone_T
       objectReference: {fileID: 0}
+    - target: {fileID: 3912389633040590202, guid: 3142282b4f1fbb747ba3250f739755ae, type: 3}
+      propertyPath: m_TagString
+      value: EmptyZone
+      objectReference: {fileID: 0}
     - target: {fileID: 3916236545317381966, guid: 3142282b4f1fbb747ba3250f739755ae, type: 3}
       propertyPath: m_RootOrder
       value: 0
