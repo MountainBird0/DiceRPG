@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour
     private PlayerCollision playerCollision;
     private CharacterController playerController;
 
+    private GameObject attackTarget;
+    private WeaponList weaponList;
+
     private Vector3 moveDir;
 
     /**********************************************************
@@ -24,13 +27,13 @@ public class PlayerController : MonoBehaviour
     ***********************************************************/
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
 
         playerRigidbody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
         playerRigidbody = GetComponent<Rigidbody>();
         playerController = GetComponent<CharacterController>();
         playerCollision = GetComponent<PlayerCollision>();
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
@@ -65,6 +68,19 @@ public class PlayerController : MonoBehaviour
 
 
         playerAnimator.SetTrigger("Attack");
+    }
+
+    /**********************************************************
+    * 설명 : 플레이어의 일반공격 이벤트
+    ***********************************************************/
+    private void Hit()
+    {
+        Debug.Log("hit");
+        //if (attackTarget == null)
+        //    return;
+
+        //weaponList.CurrentWeapon.ExecuteAttack(gameObject, attackTarget);
+        //attackTarget = null;
     }
 
 }

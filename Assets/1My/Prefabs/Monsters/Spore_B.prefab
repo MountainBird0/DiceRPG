@@ -953,10 +953,11 @@ GameObject:
   - component: {fileID: 308073039}
   - component: {fileID: 6092898993433194798}
   - component: {fileID: 3734201946279300717}
-  - component: {fileID: 3077636860413263812}
   - component: {fileID: -4093745394270899775}
   - component: {fileID: 3339154480792556038}
-  - component: {fileID: -7757047790939266030}
+  - component: {fileID: 8252495213618700816}
+  - component: {fileID: 2945924655620961140}
+  - component: {fileID: 4510708627967780049}
   m_Layer: 0
   m_Name: Spore_B
   m_TagString: BattleMonster
@@ -1070,18 +1071,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &3077636860413263812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8323697398093905092}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8703fb76ad36874480604d8a6ce321e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-4093745394270899775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1108,7 +1097,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d998fc7b1ad30d4da47b51f951c893d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-7757047790939266030
+--- !u!114 &8252495213618700816
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1117,9 +1106,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 8323697398093905092}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd669ea560a9cac4f9f07cced13e0243, type: 3}
+  m_Script: {fileID: 11500000, guid: 48d2a65aee1817a42b1ac6416ae03028, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  text: {fileID: 205259769748756927, guid: c6115bb4b90f6f440acef31504b3bec8, type: 3}
+  getpos: {fileID: 8703318440238818942}
+  color: {r: 1, g: 0, b: 0, a: 0}
+  offsetY: 5
+--- !u!114 &2945924655620961140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8323697398093905092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e9fbe58e7ada59489e2f8333bf4c1f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapons:
+  - {fileID: 11400000, guid: 01b16969139ac1041ba42bb7ee37103b, type: 2}
+--- !u!114 &4510708627967780049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8323697398093905092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fda97733c3d3e148bf026045e51c0ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 11400000, guid: 01b16969139ac1041ba42bb7ee37103b, type: 2}
+  idleWaitTime: 1
 --- !u!1 &8434639278894562985
 GameObject:
   m_ObjectHideFlags: 0
