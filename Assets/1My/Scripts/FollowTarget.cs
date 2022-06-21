@@ -6,6 +6,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FollowTarget : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class FollowTarget : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+
     }
 
     /**********************************************************
@@ -24,22 +25,29 @@ public class FollowTarget : MonoBehaviour
     ***********************************************************/
     private void LateUpdate()
     {
-        if (target == null)
+        if(SceneManager.GetActiveScene().name != "Title")
         {
-            target = GameObject.FindGameObjectWithTag("Player");
-            return;
-        }
-        else
-        {
-            if (!check)
+            if (target == null)
             {
-                offset = transform.position - target.transform.position;
-                check = true;
+                target = GameObject.FindGameObjectWithTag("Player");
+                transform.position = new Vector3(target.transform.position.x * 1.15f,
+                    target.transform.position.y * 2.7f, target.transform.position.z);
+
+                return;
             }
+            else
+            {
+                if (!check)
+                {
+                
+                    offset = transform.position - target.transform.position;
+                    check = true;
+                }
 
-            transform.position = target.transform.position + offset;
+                transform.position = target.transform.position + offset;
 
-            return;
+                return;
+            }
         }
     }
 }

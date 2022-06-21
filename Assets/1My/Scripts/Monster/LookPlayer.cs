@@ -13,11 +13,17 @@ public class LookPlayer : MonoBehaviour
 
     private void Awake()
     {
-        target = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()
     {
-        this.transform.LookAt(target.transform.position);
+        if (target == null)
+        {
+            target = GameObject.FindGameObjectWithTag("Player");
+        }
+        else
+        {
+            this.transform.LookAt(target.transform.position);
+        }
     }
 }

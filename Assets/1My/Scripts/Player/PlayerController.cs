@@ -33,6 +33,11 @@ public class PlayerController : MonoBehaviour
         playerCollision = GetComponent<PlayerCollision>();
     }
 
+    private void Start()
+    {
+        playerController.enabled = true;
+    }
+
     /**********************************************************
     * 설명 : 물리주기에 따라 플레이어를 움직임
     ***********************************************************/

@@ -11,8 +11,7 @@ public class MonsterSpawner : MonoBehaviour
 {
     void Start()
     {
-        Debug.Log($"[MonsterSpawner] : 소환 시작");
-        SpawnManager.instance.Spawning();
+        StartCoroutine(SlowSpawn());
     }
 
     private void Update()
@@ -21,5 +20,12 @@ public class MonsterSpawner : MonoBehaviour
         {
             SpawnManager.instance.Spawning();
         }
+    }
+
+    IEnumerator SlowSpawn()
+    {
+        yield return new WaitForSeconds(0.2f);
+        Debug.Log($"[MonsterSpawner] : 소환 시작");
+        SpawnManager.instance.Spawning();
     }
 }

@@ -20,6 +20,8 @@ public class LoadZone : MonoBehaviour
 
     private int selectPosition;
 
+    private GameObject player;
+
     private void Awake()
     {
         emptyZones.Clear();
@@ -33,7 +35,48 @@ public class LoadZone : MonoBehaviour
 
     private void Start()
     {
-        for(int i = 0; i < monsterZone; i++)
+        if(!GameManager.instance.IsBossAlive())
+        {
+            SpawnObject();
+            GameManager.instance.SetBossAlive(true);
+        }
+    }
+
+    private void Update()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+
+    /**********************************************************
+     * 설명 : zone을 비율에 맞게 배분
+     ***********************************************************/
+    private void DistributionZone()
+    {
+        monsterZone = (int)(emptyZones.Count * 0.7f); // Healing_Space_T
+        powerUpZone = (int)(emptyZones.Count * 0.2f);
+        healingZone = (int)Math.Ceiling(emptyZones.Count * 0.1f);
+
+        Debug.Log($"{emptyZones.Count}, {monsterZone}, {powerUpZone}, {healingZone}");
+
+        sumZone = monsterZone + powerUpZone + healingZone;
+    }
+
+    /**********************************************************
+    * 설명 : 랜덤 몬스터를 고름
+    ***********************************************************/
+    private int SelectMonster()
+    {
+        int num = UnityEngine.Random.Range(0, 1);
+        return num;
+    }
+
+    /**********************************************************
+    * 설명 : 존 위에 오브젝트 스폰
+    ***********************************************************/
+    private void SpawnObject()
+    {
+        for (int i = 0; i < monsterZone; i++)
         {
             Debug.Log("몬스터 존");
             var prefab = ObjectPoolManager.instance.GetObject(monsters[SelectMonster()].ToString());
@@ -63,30 +106,4 @@ public class LoadZone : MonoBehaviour
             emptyZones.RemoveAt(selectPosition);
         }
     }
-
-
-    /**********************************************************
-     * 설명 : zone을 비율에 맞게 배분
-     ***********************************************************/
-    private void DistributionZone()
-    {
-        monsterZone = (int)(emptyZones.Count * 0.7f); // Healing_Space_T
-        powerUpZone = (int)(emptyZones.Count * 0.2f);
-        healingZone = (int)Math.Ceiling(emptyZones.Count * 0.1f);
-
-        Debug.Log($"{emptyZones.Count}, {monsterZone}, {powerUpZone}, {healingZone}");
-
-        sumZone = monsterZone + powerUpZone + healingZone;
-    }
-
-    /**********************************************************
-    * 설명 : 랜덤 몬스터를 고름
-    ***********************************************************/
-    private int SelectMonster()
-    {
-        int num = UnityEngine.Random.Range(0, monsters.Length);
-        return num;
-    }
-
-
 }

@@ -62,7 +62,7 @@ public class SpawnManager : MonoBehaviour
         {
             var prefab = ObjectPoolManager.instance.GetObject(ObjectName);
             prefab.transform.position =spawnPoints[i].transform.position;
-
+         
 
             Debug.Log($"[SpawnManager] : {spawnPoints[i].transform.position}º“»Ø");
         }

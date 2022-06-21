@@ -16,13 +16,19 @@ public class FollowPlayer : MonoBehaviour
     private void Awake()
     {
         //animator = GetComponent<Animator>();
-        target = GameObject.FindGameObjectWithTag("Player");
         agent = GetComponent<NavMeshAgent>();
+
     }
 
-    private void OnDisable()
+    private void Start()
     {
-        agent.enabled = false;
+        target = GameObject.FindGameObjectWithTag("Player");
+        if (target != null)
+        {
+            Init();
+            Debug.Log($"[FollowPlayer] : 플레이어 찾음");
+
+        }
     }
 
     void Update()
@@ -31,7 +37,6 @@ public class FollowPlayer : MonoBehaviour
 
         if (target != null)
         {
-            Init();
             agent.destination = target.transform.position;
 
             //if (distance < 1.5)
@@ -49,11 +54,9 @@ public class FollowPlayer : MonoBehaviour
 
     }
 
-    public void Init()
+    private void Init()
     {
-        if(!agent.enabled)
-        {
-            agent.enabled = true;
-        }
+        agent.enabled = true;
     }
+
 }

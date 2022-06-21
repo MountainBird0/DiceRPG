@@ -5,21 +5,17 @@ using UnityEngine.UI;
 
 public class PlayerHealth : LivingEntity
 {
-    public GameObject Hpbar;
-
-    
-
-
     private void Awake()
     {
-        Hpbar = GameObject.FindGameObjectWithTag("Hpbar");
-        maxHealth = 100f;
+        //Hpbar = GameObject.FindGameObjectWithTag("Hpbar");
+        //maxHealth = 100f;
     }
 
     private void Update()
     {
-
-        Hpbar.transform.localScale = new Vector3(1 * (currentHealth / maxHealth), 1, 1);
-        // Debug.Log($"[MonsterHealth] 체력바 사이즈 {Hpbar.transform.localScale}");
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            Debug.Log($"{maxHealth}, {currentHealth}");
+        }
     }
 }

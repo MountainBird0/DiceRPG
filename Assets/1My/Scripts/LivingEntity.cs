@@ -23,6 +23,7 @@ public class LivingEntity : MonoBehaviour , IDamageable
     protected virtual void OnEnable()
     {
         isDead = false;
+        maxHealth = 100;
         currentHealth = maxHealth;
     }
 

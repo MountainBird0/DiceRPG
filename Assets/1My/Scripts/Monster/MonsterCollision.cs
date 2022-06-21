@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class MonsterCollision : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    //private UiManager uiManager;
+
+    public void Awake()
     {
-        
+        //uiManager = GetComponent<UiManager>();
     }
 
     // Update is called once per frame
@@ -22,6 +23,9 @@ public class MonsterCollision : MonoBehaviour
         {
             LivingEntity life = other.GetComponent<LivingEntity>();
             life.OnDamage(10, transform.position);
+            Debug.Log( $"[MonsterCollision]{life.name}, {life.currentHealth}, " +
+                $"{life.maxHealth}");
+            UiManager.instance.UpdatePlayerHp(life.currentHealth, life.maxHealth);
         }
 
     }
