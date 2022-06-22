@@ -14,7 +14,7 @@ public class DamageScrolling : MonoBehaviour, IAttackable
 
     public Color color;
 
-    public float offsetY = 5f;
+    public float offsetY = 1f;
 
     public void OnAttack(GameObject attacker, Attack attack)
     {
@@ -23,14 +23,13 @@ public class DamageScrolling : MonoBehaviour, IAttackable
 
         var s = transform.position;
         var pos = getpos.position;
-        //pos.y += offsetY;
 
         pos.y += offsetY;
         text.transform.position = pos;
         var go = Instantiate(text);
 
-        // prefab.Init(attack.Damage.ToString(), Color.red);
-        // text.transform.position = attacker.transform.position;
+        //text.GetComponent<Scroll>().Init(color);
+        //text.transform.position = attacker.transform.position;
     }
 
 }

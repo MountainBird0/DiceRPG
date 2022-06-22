@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class LivingEntity : MonoBehaviour , IDamageable , IAttackable
+public class LivingEntity : MonoBehaviour, IDamageable, IAttackable
 {
     public float maxHealth { get; protected set; }
     public float currentHealth { get; protected set; }
@@ -25,6 +25,11 @@ public class LivingEntity : MonoBehaviour , IDamageable , IAttackable
         isDead = false;
         maxHealth = 100;
         currentHealth = maxHealth;
+        if (gameObject.CompareTag("BattleMonster"))
+        {
+            MonsterHealth targetHp = gameObject.GetComponent<MonsterHealth>();
+            targetHp.UpdateMonHp();
+        }
     }
 
 
@@ -33,7 +38,7 @@ public class LivingEntity : MonoBehaviour , IDamageable , IAttackable
     ***********************************************************/
     public virtual void RestoreHealth(float newHealth)
     {
-        if(isDead)
+        if (isDead)
         {
             return;
         }
@@ -45,7 +50,7 @@ public class LivingEntity : MonoBehaviour , IDamageable , IAttackable
     ***********************************************************/
     public virtual void Die()
     {
-        if(onDeath != null)
+        if (onDeath != null)
         {
             onDeath();
         }
@@ -54,16 +59,23 @@ public class LivingEntity : MonoBehaviour , IDamageable , IAttackable
     }
 
     /**********************************************************
-    * 설명 : 공격을 함
+    * 설명 : 공격을 받음
     ***********************************************************/
     public void OnAttack(GameObject attacker, Attack attack)
     {
         currentHealth -= attack.Damage;
+        Debug.Log($"[LivingEntity]현재체력{currentHealth}");
+        if (gameObject.CompareTag("BattleMonster"))
+        {
+            MonsterHealth targetHp = gameObject.GetComponent<MonsterHealth>();
+            targetHp.UpdateMonHp();
+        }
+
         if (currentHealth <= 0)
         {
             currentHealth = 0;
-
-            Debug.Log("You Die");
+            Die();
+            Debug.Log($"[LivingEntity]{gameObject}You Die");
         };
     }
 
@@ -76,7 +88,7 @@ public class LivingEntity : MonoBehaviour , IDamageable , IAttackable
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
         Debug.Log($"{gameObject.name}가 {damage} 입음, 남은체력 {currentHealth}");
-        if(currentHealth == 0 && !isDead)
+        if (currentHealth == 0 && !isDead)
         {
             Debug.Log("죽음");
             Die();

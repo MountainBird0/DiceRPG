@@ -15,16 +15,23 @@ public class MonsterHealth : LivingEntity
         maxHealth = 100f;
     }
 
+
     private void Update()
     {
 
 
-        Hpbar.transform.localScale = new Vector3(1 * (currentHealth / maxHealth), 1, 1);     
+        //Hpbar.transform.localScale = new Vector3(1 * (currentHealth / maxHealth), 1, 1);     
     }
 
     public override void Die()
     {
         base.Die();
         this.gameObject.SetActive(false);
+    }
+
+    public void UpdateMonHp()
+    {
+        Hpbar.transform.localScale = new Vector3(1 * (currentHealth / maxHealth), 1, 1);
+
     }
 }

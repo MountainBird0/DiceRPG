@@ -503,7 +503,7 @@ GameObject:
   - component: {fileID: 5308455074657608205}
   m_Layer: 0
   m_Name: Chewer_B
-  m_TagString: Untagged
+  m_TagString: BattleMonster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -626,7 +626,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8703fb76ad36874480604d8a6ce321e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
 --- !u!114 &5339394853524019266
 MonoBehaviour:
   m_ObjectHideFlags: 0

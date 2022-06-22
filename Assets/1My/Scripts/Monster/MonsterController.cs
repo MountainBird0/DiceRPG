@@ -168,6 +168,8 @@ public class MonsterController : MonoBehaviour
             case Weapon w:
                 Debug.Log("무기로때림");
                 w.ExecuteAttack(gameObject, target.gameObject);
+                LivingEntity life = target.GetComponent<LivingEntity>();
+                UiManager.instance.UpdatePlayerHp(life.currentHealth, life.maxHealth);
                 break;
         }
         //weapon.ExecuteAttack(gameObject, player.gameObject);
