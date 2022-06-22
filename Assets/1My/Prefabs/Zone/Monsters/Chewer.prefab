@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 7502795457669280778}
   m_Layer: 0
   m_Name: Chewer
-  m_TagString: Untagged
+  m_TagString: TownMonster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

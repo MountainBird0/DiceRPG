@@ -5549,9 +5549,10 @@ GameObject:
   - component: {fileID: 5720744222729781269}
   - component: {fileID: 1838601535984015983}
   - component: {fileID: -7262994806694965360}
+  - component: {fileID: -8656294453933362648}
   m_Layer: 0
   m_Name: Wraith_Boss
-  m_TagString: Untagged
+  m_TagString: TownMonster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5607,6 +5608,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64402e0975fe3b849940f62d156ffe30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &-8656294453933362648
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4913420747052751535}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 5, z: 10}
+  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &5044227281718587095
 GameObject:
   m_ObjectHideFlags: 0

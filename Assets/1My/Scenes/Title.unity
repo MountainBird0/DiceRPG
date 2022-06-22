@@ -20578,6 +20578,26 @@ PrefabInstance:
       propertyPath: playerIcon
       value: 
       objectReference: {fileID: 1265564851}
+    - target: {fileID: 8942327925259475265, guid: b5359163421b34643bfbaa4950fee6af, type: 3}
+      propertyPath: poolData.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942327925259475265, guid: b5359163421b34643bfbaa4950fee6af, type: 3}
+      propertyPath: poolData.Array.data[7].count
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942327925259475265, guid: b5359163421b34643bfbaa4950fee6af, type: 3}
+      propertyPath: poolData.Array.data[8].count
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942327925259475265, guid: b5359163421b34643bfbaa4950fee6af, type: 3}
+      propertyPath: poolData.Array.data[7].prefab
+      value: 
+      objectReference: {fileID: 4913420747052751535, guid: 556de9e4dc76ade488006401dde0d876, type: 3}
+    - target: {fileID: 8942327925259475265, guid: b5359163421b34643bfbaa4950fee6af, type: 3}
+      propertyPath: poolData.Array.data[8].prefab
+      value: 
+      objectReference: {fileID: 4202042008913759454, guid: 954abe8f6523d3346897104f0ba1c228, type: 3}
     - target: {fileID: 8942327925810966923, guid: b5359163421b34643bfbaa4950fee6af, type: 3}
       propertyPath: m_Name
       value: GameManager
