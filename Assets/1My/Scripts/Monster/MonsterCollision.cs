@@ -19,14 +19,14 @@ public class MonsterCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            LivingEntity life = other.GetComponent<LivingEntity>();
-            life.OnDamage(10, transform.position);
-            Debug.Log( $"[MonsterCollision]{life.name}, {life.currentHealth}, " +
-                $"{life.maxHealth}");
-            UiManager.instance.UpdatePlayerHp(life.currentHealth, life.maxHealth);
-        }
+        //if (other.CompareTag("Player"))
+        //{
+        //    LivingEntity life = other.GetComponent<LivingEntity>();
+        //    life.OnDamage(10, transform.position);
+        //    Debug.Log( $"[MonsterCollision]{life.name}, {life.currentHealth}, " +
+        //        $"{life.maxHealth}");
+        //    UiManager.instance.UpdatePlayerHp(life.currentHealth, life.maxHealth);
+        //}
 
     }
 }

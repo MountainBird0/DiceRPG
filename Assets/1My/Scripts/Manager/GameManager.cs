@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     private bool bossAlive = false;
 
+    private Vector3 lastTowntransform;
+
     /**********************************************************
      * 설명 : 게임 시작과 동시에 싱글톤을 구성
      ***********************************************************/
@@ -48,7 +50,10 @@ public class GameManager : MonoBehaviour
     ***********************************************************/
     public void MoveBattleField()
     {
+        var prefab = GameObject.FindGameObjectWithTag("Player");
+        prefab.GetComponent<CharacterController>().enabled = false;
         SceneManager.LoadScene("BattleField1");
+        StartCoroutine(GoBattleField());
     }
 
     /**********************************************************
@@ -56,7 +61,10 @@ public class GameManager : MonoBehaviour
     ***********************************************************/
     public void MoveTown()
     {
+        var prefab = GameObject.FindGameObjectWithTag("Player");
+        prefab.GetComponent<CharacterController>().enabled = false;
         SceneManager.LoadScene("Town");
+        StartCoroutine(GoTown());
     }
 
 
@@ -78,15 +86,28 @@ public class GameManager : MonoBehaviour
         Debug.Log($"[GameManager] : 플레이어 위치 {prefab.transform.position}");
     }
 
-
     /**********************************************************
-    * 설명 : 씬 전환하는 동안 나올 화면
+    * 설명 : 배틀필드로 이동
     ***********************************************************/
     IEnumerator GoBattleField()
     {
-        yield return new WaitForSeconds(0.2f);
-        SceneManager.LoadScene("BattleField1");
+        yield return new WaitForSeconds(1f);
+        var prefab = GameObject.FindGameObjectWithTag("Player");
+        var startPoint = GameObject.FindGameObjectWithTag("StartPoint");
+        lastTowntransform = prefab.transform.position;
+        prefab.transform.localPosition = startPoint.transform.position;
+        prefab.GetComponent<CharacterController>().enabled = true;     
+    }
 
+    /**********************************************************
+    * 설명 : 타운으로 이동
+    ***********************************************************/
+    IEnumerator GoTown()
+    {
+        yield return new WaitForSeconds(1f);
+        var prefab = GameObject.FindGameObjectWithTag("Player");
+        prefab.transform.position = lastTowntransform;
+        prefab.GetComponent<CharacterController>().enabled = true;
     }
 
     /**********************************************************

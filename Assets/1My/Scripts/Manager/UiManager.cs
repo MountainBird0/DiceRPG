@@ -58,4 +58,26 @@ public class UiManager : MonoBehaviour
         Debug.Log("newstart 누름");
         GameManager.instance.StartNewGame();
     }
+
+    public void OnClickAttack()
+    {
+        var player = GameObject.FindGameObjectWithTag("Player");
+        player.GetComponent<PlayerController>().ClickAttack();
+    }
+
+    public void OnClickSkill1()
+    {
+        //Debug.Log("[UiManager]스킬버튼 누름");
+
+        var player = GameObject.FindGameObjectWithTag("Player");
+        player.GetComponent<PlayerController>().RubyAttack();
+    }
+
+    public void OnClickSkill2()
+    {
+        Debug.Log("[UiManager]스킬2 버튼 누름");
+
+        var player = GameObject.FindGameObjectWithTag("Player");
+        player.GetComponent<PlayerController>().LineShot();
+    }
 }

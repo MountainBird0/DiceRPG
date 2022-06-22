@@ -9,28 +9,31 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private float playerMoveSpeed = 4.0f;
-    //private float gravity = 20.0f;
+    private float playerMoveSpeed = 10.0f;
+    private float gravity = 20.0f;
 
     private Rigidbody playerRigidbody;
     private Animator playerAnimator;
     private PlayerCollision playerCollision;
     private CharacterController playerController;
 
+    private GameObject attackTarget;
+    private WeaponList weaponList;
+
     private Vector3 moveDir;
+    private Vector3 rotDir;
 
     /**********************************************************
     * 설명 : 사용할 컴포넌트들의 참조를 불러옴
     ***********************************************************/
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
 
         playerRigidbody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
-        playerRigidbody = GetComponent<Rigidbody>();
         playerController = GetComponent<CharacterController>();
         playerCollision = GetComponent<PlayerCollision>();
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
@@ -38,18 +41,26 @@ public class PlayerController : MonoBehaviour
         playerController.enabled = true;
     }
 
+    private void FixedUpdate()
+    {
+        moveDir.y -= gravity * Time.deltaTime;
+    }
+
+
     /**********************************************************
     * 설명 : 물리주기에 따라 플레이어를 움직임
     ***********************************************************/
     private void Update()
     {
-        moveDir = new Vector3(InputManager.instance.moveX, 0, InputManager.instance.moveZ);
+        moveDir = new Vector3(InputManager.instance.moveX, moveDir.y, InputManager.instance.moveZ);
+        rotDir = new Vector3(InputManager.instance.moveX, 0, InputManager.instance.moveZ);
 
         playerController.Move(moveDir * Time.deltaTime * playerMoveSpeed);
+        
 
-        if(InputManager.instance.IsMove())
+        if (InputManager.instance.IsMove())
         {
-            transform.rotation = Quaternion.LookRotation(moveDir);
+            transform.rotation = Quaternion.LookRotation(rotDir);
         }
 
         playerAnimator.SetFloat("Move", InputManager.instance.MoveValue());
@@ -61,10 +72,46 @@ public class PlayerController : MonoBehaviour
     ***********************************************************/
     public void ClickAttack()
     {
-        //playerMoveSpeed = 0;
-
-
         playerAnimator.SetTrigger("Attack");
     }
+
+    /**********************************************************
+    * 설명 : 플레이어의 일반공격 이벤트
+    ***********************************************************/
+    private void Hit()
+    {
+        Debug.Log("플레이어가 때림");
+        Debug.Log(weaponList.CurrentWeapon);
+        //if (attackTarget == null)
+        //    return;
+
+
+        weaponList.CurrentWeapon.ExecuteAttack(gameObject, attackTarget);
+        MonsterHealth targetHp = attackTarget.GetComponent<MonsterHealth>();
+        targetHp.UpdateMonHp();
+        attackTarget = null;
+    }
+
+    /**********************************************************
+    * 설명 : 플레이어의 스킬공격
+    ***********************************************************/
+    public CircleRangeSkill rubyAttack;
+    public void RubyAttack()
+    {
+        Debug.Log("[PlayerController]플레이어 스킬1사용");
+        rubyAttack.Fire(gameObject, transform.position);
+
+    }
+
+    public StartPlayerSkill lineShot;
+    public void LineShot()
+    {
+        Debug.Log("[PlayerController]플레이어 스킬2사용");
+        lineShot.Fire(gameObject, transform.position);
+    }
+
+
+
+
 
 }
