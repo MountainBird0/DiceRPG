@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class LivingEntity : MonoBehaviour, IDamageable, IAttackable
+public class LivingEntity : MonoBehaviour, IAttackable
 {
     public float maxHealth { get; protected set; }
     public float currentHealth { get; protected set; }
@@ -82,16 +82,16 @@ public class LivingEntity : MonoBehaviour, IDamageable, IAttackable
     /**********************************************************
     * 설명 : 데미지를 입음
     ***********************************************************/
-    public virtual void OnDamage(float damage, Vector3 hitNormal)
-    {
-        currentHealth -= damage;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+    //public virtual void OnDamage(float damage, Vector3 hitNormal)
+    //{
+    //    currentHealth -= damage;
+    //    currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-        Debug.Log($"{gameObject.name}가 {damage} 입음, 남은체력 {currentHealth}");
-        if (currentHealth == 0 && !isDead)
-        {
-            Debug.Log("죽음");
-            Die();
-        }
-    }
+    //    Debug.Log($"{gameObject.name}가 {damage} 입음, 남은체력 {currentHealth}");
+    //    if (currentHealth == 0 && !isDead)
+    //    {
+    //        Debug.Log("죽음");
+    //        Die();
+    //    }
+    //}
 }

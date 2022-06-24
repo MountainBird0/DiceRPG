@@ -7,7 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : LivingEntity
 {
     private float playerMoveSpeed = 10.0f;
     private float gravity = 20.0f;
@@ -20,22 +20,28 @@ public class PlayerController : MonoBehaviour
     private GameObject attackTarget;
     private WeaponList weaponList;
 
+    private InputManager inputManager;
+
     private Vector3 moveDir;
     private Vector3 rotDir;
 
     public LineRenderer playerSkillRange;
+
+    private float curHp;
 
     /**********************************************************
     * 설명 : 사용할 컴포넌트들의 참조를 불러옴
     ***********************************************************/
     private void Awake()
     {
-
+        inputManager = GetComponent<InputManager>();
         playerRigidbody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
         playerController = GetComponent<CharacterController>();
         playerCollision = GetComponent<PlayerCollision>();
         DontDestroyOnLoad(gameObject);
+
+        curHp = currentHealth;
     }
 
     private void Start()
@@ -54,18 +60,24 @@ public class PlayerController : MonoBehaviour
     ***********************************************************/
     private void Update()
     {
-        moveDir = new Vector3(InputManager.instance.moveX, moveDir.y, InputManager.instance.moveZ);
-        rotDir = new Vector3(InputManager.instance.moveX, 0, InputManager.instance.moveZ);
+        if (curHp != currentHealth)
+        {
+            playerAnimator.SetTrigger("Damaged");
+            curHp = currentHealth;
+        }
+
+        moveDir = new Vector3(inputManager.moveX, moveDir.y, inputManager.moveZ);
+        rotDir = new Vector3(inputManager.moveX, 0, inputManager.moveZ);
 
         playerController.Move(moveDir * Time.deltaTime * playerMoveSpeed);
         
 
-        if (InputManager.instance.IsMove())
+        if (inputManager.IsMove())
         {
             transform.rotation = Quaternion.LookRotation(rotDir);
         }
 
-        playerAnimator.SetFloat("Move", InputManager.instance.MoveValue());
+        playerAnimator.SetFloat("Move", inputManager.MoveValue());
     }
 
 
@@ -118,7 +130,4 @@ public class PlayerController : MonoBehaviour
         playerSkillRange.SetPosition(0, transform.position);
         playerSkillRange.SetPosition(1, transform.position + transform.forward * 3);
     }
-
-
-
 }

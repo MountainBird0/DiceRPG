@@ -1,3 +1,8 @@
+/******************************************************************************
+* 작 성 일 : 2022-06-23
+* 내    용 : 보스몬스터 Wraith의 AI를 담당 
+* 수 정 일 :
+*******************************************************************************/
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -268,6 +273,8 @@ public class MonsterWraithController : LivingEntity
     public override void Die()
     {
         //base.Die();
+        gauge.SetActive(false);
+        charging.SetActive(false);
         agent.isStopped = true;
         animator.SetTrigger("Die");
         StartCoroutine(SetAct());
@@ -275,7 +282,7 @@ public class MonsterWraithController : LivingEntity
 
     IEnumerator SetAct()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
         this.gameObject.SetActive(false);
 
     }

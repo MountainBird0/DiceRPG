@@ -20,8 +20,6 @@ public class LoadZone : MonoBehaviour
 
     private int selectPosition;
 
-    private GameObject player;
-
     private void Awake()
     {
         emptyZones.Clear();
@@ -42,12 +40,6 @@ public class LoadZone : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-    }
-
-
     /**********************************************************
      * 설명 : zone을 비율에 맞게 배분
      ***********************************************************/
@@ -67,7 +59,7 @@ public class LoadZone : MonoBehaviour
     ***********************************************************/
     private int SelectMonster()
     {
-        int num = UnityEngine.Random.Range(0, 1);
+        int num = UnityEngine.Random.Range(0, 2);
         return num;
     }
 

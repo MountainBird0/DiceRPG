@@ -1,3 +1,8 @@
+/******************************************************************************
+* 작 성 일 : 2022-06-21
+* 내    용 : 몬스터의 기본 AI를 담당 
+* 수 정 일 :
+*******************************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +15,7 @@ public class MonsterController : LivingEntity
         Idle,
         Trace,
         Attack,
+        Die,
         GameOver,
     }
 
@@ -38,6 +44,10 @@ public class MonsterController : LivingEntity
                     break;
 
                 case Status.Attack:
+                    timer = 0f;
+                    agent.isStopped = true;
+                    break;
+                case Status.Die:
                     timer = 0f;
                     agent.isStopped = true;
                     break;
@@ -119,6 +129,9 @@ public class MonsterController : LivingEntity
             case Status.Attack:
                 UpdateAttack();
                 break;
+            case Status.Die:
+                UpdateDie();
+                break;
         }
 
     }
@@ -168,6 +181,13 @@ public class MonsterController : LivingEntity
         }
     }
 
+    private void UpdateDie()
+    {
+        agent.isStopped = true;
+        animator.SetTrigger("Die");
+        StartCoroutine(SetAct());
+    }
+
     private void Hit()
     {
         Debug.Log("hit 드감");
@@ -185,15 +205,18 @@ public class MonsterController : LivingEntity
 
     public override void Die()
     {
-        //base.Die();
-        agent.isStopped = true;
+        
+        base.Die();
+        
         animator.SetTrigger("Die");
         StartCoroutine(SetAct());
+
+
     }
 
     IEnumerator SetAct()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         this.gameObject.SetActive(false);
 
     }

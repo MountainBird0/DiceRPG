@@ -5,30 +5,26 @@ using UnityEngine.UI;
 
 public class MonsterHealth : LivingEntity
 {
-    public GameObject Hpbar;
+    public GameObject hpBar;
+    public GameObject ground;
 
-    public Camera cameraToLookAt;
 
     private void Awake()
     {
-        cameraToLookAt = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         maxHealth = 100f;
     }
 
-
     private void Update()
     {
+        hpBar.transform.rotation = Camera.main.transform.rotation;
+        ground.transform.rotation =  Camera.main.transform.rotation;
 
-
-        //Hpbar.transform.localScale = new Vector3(1 * (currentHealth / maxHealth), 1, 1);     
     }
-
-    
 
     public void UpdateMonHp()
     {
         Debug.Log("[MonsterHealth] hp바 업데이트");
-        Hpbar.transform.localScale = new Vector3(1 * (currentHealth / maxHealth), 1, 1);
+        hpBar.transform.localScale = new Vector3(1 * (currentHealth / maxHealth), 1, 1);
 
     }
 }
