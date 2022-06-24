@@ -61,7 +61,7 @@ public class SpawnManager : MonoBehaviour
         for (int i = 0; i < spawnPoints.Count; i++)
         {
             var prefab = ObjectPoolManager.instance.GetObject(ObjectName);
-            prefab.transform.position =spawnPoints[i].transform.position;
+            prefab.transform.position = spawnPoints[i].transform.position;
          
 
             Debug.Log($"[SpawnManager] : {spawnPoints[i].transform.position}¼ÒÈ¯");

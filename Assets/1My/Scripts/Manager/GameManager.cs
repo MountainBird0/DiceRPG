@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     public void StartNewGame()
     {
         SceneManager.LoadScene("Town");
+        UiManager.instance.SetPlayerHp(true);
         StartCoroutine(Delay());
      
     }
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour
         var prefab = GameObject.FindGameObjectWithTag("Player");
         prefab.GetComponent<CharacterController>().enabled = false;
         SceneManager.LoadScene("BattleField1");
+        UiManager.instance.SetPlayerAttack(true);
         StartCoroutine(GoBattleField());
     }
 
@@ -64,6 +66,7 @@ public class GameManager : MonoBehaviour
         var prefab = GameObject.FindGameObjectWithTag("Player");
         prefab.GetComponent<CharacterController>().enabled = false;
         SceneManager.LoadScene("Town");
+        UiManager.instance.SetPlayerAttack(false);
         StartCoroutine(GoTown());
     }
 

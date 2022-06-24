@@ -11,7 +11,7 @@ TagManager:
   - Hpbar
   - EmptyZone
   - StartPoint
-  - PlayerUI
+  - PlayerHp
   layers:
   - Default
   - TransparentFX
@@ -19,11 +19,11 @@ TagManager:
   - 
   - Water
   - UI
-  - TownMoster
+  - TownMonster
   - Hp
-  - 
-  - 
-  - 
+  - BattleMonster
+  - Player
+  - friendly
   - 
   - 
   - 

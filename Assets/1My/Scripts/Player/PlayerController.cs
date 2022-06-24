@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveDir;
     private Vector3 rotDir;
 
+    public LineRenderer playerSkillRange;
+
     /**********************************************************
     * 설명 : 사용할 컴포넌트들의 참조를 불러옴
     ***********************************************************/
@@ -99,7 +101,8 @@ public class PlayerController : MonoBehaviour
     public void RubyAttack()
     {
         Debug.Log("[PlayerController]플레이어 스킬1사용");
-        rubyAttack.Fire(gameObject, transform.position);
+        playerAnimator.SetTrigger("Skill1");
+        rubyAttack.Fire(gameObject, transform.position, 10);
 
     }
 
@@ -107,10 +110,14 @@ public class PlayerController : MonoBehaviour
     public void LineShot()
     {
         Debug.Log("[PlayerController]플레이어 스킬2사용");
-        lineShot.Fire(gameObject, transform.position);
+        DrawRangeLineShot();
+        lineShot.Fire(gameObject, transform.position, 8);
     }
-
-
+    public void DrawRangeLineShot()
+    {
+        playerSkillRange.SetPosition(0, transform.position);
+        playerSkillRange.SetPosition(1, transform.position + transform.forward * 3);
+    }
 
 
 

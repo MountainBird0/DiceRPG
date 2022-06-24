@@ -23,14 +23,11 @@ public class MonsterHealth : LivingEntity
         //Hpbar.transform.localScale = new Vector3(1 * (currentHealth / maxHealth), 1, 1);     
     }
 
-    public override void Die()
-    {
-        base.Die();
-        this.gameObject.SetActive(false);
-    }
+    
 
     public void UpdateMonHp()
     {
+        Debug.Log("[MonsterHealth] hp바 업데이트");
         Hpbar.transform.localScale = new Vector3(1 * (currentHealth / maxHealth), 1, 1);
 
     }

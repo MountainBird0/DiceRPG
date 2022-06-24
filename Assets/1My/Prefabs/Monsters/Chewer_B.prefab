@@ -501,7 +501,7 @@ GameObject:
   - component: {fileID: 5339394853524019266}
   - component: {fileID: 4972279537686384606}
   - component: {fileID: 5308455074657608205}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Chewer_B
   m_TagString: BattleMonster
   m_Icon: {fileID: 0}

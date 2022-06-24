@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 561013acf6db58343a44ef3f74751d63
+guid: 7a3a854002f96ff48914a5371df92e05
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -142,8 +142,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a179ff0a480928b45ab83429b7f25be1
-      internalID: -2020406076
+      spriteID: 9e2a291d480aee140acc6fc915a4a207
+      internalID: -1590236600
       vertices: []
       indices: 
       edges: []
@@ -163,8 +163,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 60f47bcb5ab0a764a901f16f20511040
-      internalID: 572650483
+      spriteID: ce79daa6fd6bac246a18e204fb7ed5ab
+      internalID: -1042193838
       vertices: []
       indices: 
       edges: []
@@ -184,8 +184,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1cba812a73ddc184baa241c97b8d1bb8
-      internalID: -1394888718
+      spriteID: 52e124b1009f24347a6449084856fbba
+      internalID: -1666754874
       vertices: []
       indices: 
       edges: []
@@ -205,8 +205,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0428d78832c8a5e41bd9aef0da0e4e5b
-      internalID: -346471917
+      spriteID: 65228b4ed22b732418bc605fe23de9a0
+      internalID: -1800320784
       vertices: []
       indices: 
       edges: []
@@ -226,8 +226,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c7bc4bf327c05e548a38af56f0a39241
-      internalID: -1433720263
+      spriteID: 52c0460e8ec1b484cb55ab3ec74eec9b
+      internalID: 2036041673
       vertices: []
       indices: 
       edges: []
@@ -247,8 +247,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5fa791f05ca2a4540a42dddd0b8ff47a
-      internalID: 1018376580
+      spriteID: 0e5734d31e1305c4198aa1e40d95fb6c
+      internalID: -1767751876
       vertices: []
       indices: 
       edges: []
@@ -264,12 +264,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      DIce_1: 572650483
-      DIce_4: -1433720263
-      DIce_3: -346471917
-      DIce_2: -1394888718
-      DIce_0: -2020406076
-      DIce_5: 1018376580
+      DIce_1: -1042193838
+      DIce_4: 2036041673
+      DIce_3: -1800320784
+      DIce_2: -1666754874
+      DIce_0: -1590236600
+      DIce_5: -1767751876
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

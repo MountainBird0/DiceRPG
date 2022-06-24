@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -9,7 +8,8 @@ public class UiManager : MonoBehaviour
 {
     public static UiManager instance;
 
-    public GameObject playerUI;
+    public GameObject playerHp;
+    public GameObject playerAttack;
     public Image hpBar;
 
     /**********************************************************
@@ -38,11 +38,23 @@ public class UiManager : MonoBehaviour
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().name != "Title")
-        {
-            playerUI.SetActive(true);
-        }
+
     }
+
+
+    /**********************************************************
+    * 설명 : 현재 씬에 따라 UI 활성화
+    ***********************************************************/
+    public void SetPlayerHp(bool tf)
+    {
+        playerHp.SetActive(tf);
+    }
+    public void SetPlayerAttack(bool tf)
+    {
+        playerAttack.SetActive(tf);
+    }
+
+
 
 
     public void UpdatePlayerHp(float curHp, float maxHp)
@@ -81,3 +93,7 @@ public class UiManager : MonoBehaviour
         player.GetComponent<PlayerController>().LineShot();
     }
 }
+
+//GetComponent<Button>().interactable = true;
+
+//GetComponent<Button>().interactable = false;

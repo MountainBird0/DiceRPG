@@ -1,15 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MonsterController : LivingEntity
+public class MonsterWraithController : LivingEntity
 {
     public enum Status
     {
         Idle,
         Trace,
         Attack,
+        Charging,
+        Spin,
         GameOver,
     }
 
@@ -32,6 +35,8 @@ public class MonsterController : LivingEntity
                     break;
 
                 case Status.Trace:
+                    gauge.SetActive(false);
+
                     agent.destination = target.transform.position;
                     agent.speed = speed;
                     agent.isStopped = false;
@@ -39,6 +44,17 @@ public class MonsterController : LivingEntity
 
                 case Status.Attack:
                     timer = 0f;
+                    agent.isStopped = true;
+                    break;
+
+                case Status.Charging:
+                    gauge.SetActive(true);
+                    chargingTime = 3f;
+                    charging.transform.localScale = new Vector2(1,1);
+                    agent.isStopped = true;
+                    break;
+
+                case Status.Spin:
                     agent.isStopped = true;
                     break;
 
@@ -60,10 +76,19 @@ public class MonsterController : LivingEntity
     NavMeshAgent agent;
 
     private GameObject target;
+
+    public GameObject gauge;
+    public GameObject charging;
+    private float chargingSpeed = 2f;
+    private float chargingTime = 3f;
+
+
     public float idleWaitTime = 1f;
     private float timer;
 
     private float targetDistance; // 안쓸거같음
+
+    private int attackCount = 0;
 
     private float curHp;
 
@@ -71,30 +96,27 @@ public class MonsterController : LivingEntity
     {
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        gauge.SetActive(false);
         curHp = currentHealth;
     }
 
     private void Start()
     {
-
         target = GameObject.FindGameObjectWithTag("Player");
         if (target != null)
         {
             Init();
-
-
         }
         CurrentStats = Status.Idle;
     }
 
     private void Update()
     {
-        if(curHp != currentHealth)
+        if (curHp != currentHealth)
         {
             animator.SetTrigger("Damaged");
             curHp = currentHealth;
         }
-        
 
         animator.SetFloat("Speed", agent.velocity.magnitude);
 
@@ -119,9 +141,15 @@ public class MonsterController : LivingEntity
             case Status.Attack:
                 UpdateAttack();
                 break;
+            case Status.Charging:
+                UpdateCharging();
+                break;
+            case Status.Spin:
+                UpdateSpin();
+                break;
         }
-
     }
+
 
     private void Init()
     {
@@ -139,11 +167,17 @@ public class MonsterController : LivingEntity
 
     private void UpdateTrace()
     {
-
         agent.destination = target.transform.position;
         if (targetDistance < weapon.attackRange)
         {
-            CurrentStats = Status.Attack;
+            if (attackCount >= 3)
+            {
+                CurrentStats = Status.Charging;
+            }
+            else
+            {
+                CurrentStats = Status.Attack;
+            }
         }
     }
 
@@ -163,10 +197,58 @@ public class MonsterController : LivingEntity
         if (timer < 0f)
         {
             timer = weapon.coolDown;
+            Debug.Log($"[MonsterWraithController]공격횟수증가 : {attackCount}");
+            if (attackCount >= 3)
+            {
+                CurrentStats = Status.Charging;
+                return;
+            }
             animator.SetTrigger("Attack");
-
+            attackCount++;
         }
     }
+
+    /**********************************************************
+    * 설명 : 스킬 공격 전 차지
+    ***********************************************************/
+    private void UpdateCharging()
+    {
+        chargingTime -= Time.deltaTime;
+
+        if (chargingTime > 0)
+        {
+            charging.transform.localScale = new Vector2(charging.transform.localScale.x + (chargingSpeed * Time.deltaTime),
+               charging.transform.localScale.y + (chargingSpeed * Time.deltaTime));
+        }
+        else
+        {
+            CurrentStats = Status.Spin;
+        }
+    }
+
+    private void UpdateSpin()
+    {
+        //charging.transform.localScaleㄴ = new Vector2(1+ (charging.transform.localScale.x * chargingSpeed),
+        //1+ (charging.transform.localScale.y * chargingSpeed));
+        attackCount = 0;
+        SpinAttack();
+        CurrentStats = Status.Trace;
+
+    }
+
+
+    /**********************************************************
+    * 설명 : 스킬 공격
+    ***********************************************************/
+    public CircleRangeSkill Spin;
+    private void  SpinAttack()
+    {
+        Debug.Log("[MonsterWraithController]몬스터 스핀 사용");
+        Spin.Fire(gameObject, transform.position, 8);
+        animator.SetTrigger("Skill1");
+
+    }
+
 
     private void Hit()
     {
@@ -193,7 +275,7 @@ public class MonsterController : LivingEntity
 
     IEnumerator SetAct()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         this.gameObject.SetActive(false);
 
     }

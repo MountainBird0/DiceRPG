@@ -37,7 +37,7 @@ public class Scroll : MonoBehaviour
         }
         else
         {
-            Destroy(text);
+            Destroy(gameObject);
         }
     }
 
