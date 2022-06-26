@@ -7,7 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "skill.asset", menuName = "skill / CircleRange")]
+[CreateAssetMenu(fileName = "CircleRangeSkill.asset", menuName = "Skill / CircleRange")]
 public class CircleRangeSkill : AttackDefinition
 {
     public float radius;

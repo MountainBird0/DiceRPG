@@ -17,12 +17,14 @@ public class UiManager : MonoBehaviour
     public GameObject playerAttack;
     public Image hpBar;
 
+    public GameObject inven;
+    private bool isInvenOpen = false;
+
     /**********************************************************
      * 설명 : 게임 시작과 동시에 싱글톤을 구성
      ***********************************************************/
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
 
         if (instance == null)
         {
@@ -36,13 +38,23 @@ public class UiManager : MonoBehaviour
 
         //ObjectPoolManager.instance.GetObject("Player");
     }
-
-    private void Start()
-    {
-    }
-
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            Debug.Log("인밴열기 누름");
+
+            if (!isInvenOpen)
+            {
+                inven.SetActive(true);
+                isInvenOpen = true;
+            }
+            else
+            {
+                inven.SetActive(false);
+                isInvenOpen = false;
+            }
+        }
 
     }
 

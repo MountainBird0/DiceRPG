@@ -39,7 +39,7 @@ public class PlayerController : LivingEntity
         playerAnimator = GetComponent<Animator>();
         playerController = GetComponent<CharacterController>();
         playerCollision = GetComponent<PlayerCollision>();
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
         curHp = currentHealth;
     }

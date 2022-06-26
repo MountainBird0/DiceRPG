@@ -7,7 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "skill.asset", menuName = "skill / StartPlayer")]
+[CreateAssetMenu(fileName = "StartPlayerSkill.asset", menuName = "Skill / StartPlayer")]
 public class StartPlayerSkill : AttackDefinition
 {
     public GameObject effectPrefab;

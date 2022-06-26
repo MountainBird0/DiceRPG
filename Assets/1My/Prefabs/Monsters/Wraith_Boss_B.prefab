@@ -5569,8 +5569,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fd5e842649e36a4d8b017ba040439a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hpbar: {fileID: 8201943161842506176}
-  cameraToLookAt: {fileID: 0}
+  hpBar: {fileID: 8201943161842506176}
+  ground: {fileID: 7035041822490082556}
 --- !u!114 &2080689314404200665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11385,6 +11385,11 @@ PrefabInstance:
 --- !u!224 &1227051287434592068 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8893659395044517366, guid: dbb7eecdf9761494bbbabe07e5a17baf, type: 3}
+  m_PrefabInstance: {fileID: 7668500676762720946}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7035041822490082556 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 849634415280744014, guid: dbb7eecdf9761494bbbabe07e5a17baf, type: 3}
   m_PrefabInstance: {fileID: 7668500676762720946}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &8201943161842506176 stripped

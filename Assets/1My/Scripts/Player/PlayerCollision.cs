@@ -9,34 +9,23 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.collider.CompareTag("TownMonster"))
-        {
-            string EnemyName = collision.collider.gameObject.name;
-            EnemyName = EnemyName.Replace("(Clone)","");
-            SpawnManager.instance.GetNameOfPrefab(EnemyName + "_B");
-            Debug.Log($"[PlayerCollision] : 마을에서 {EnemyName}과 충돌");
-            collision.gameObject.SetActive(false);
-            GameManager.instance.MoveBattleField();
-        }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if(collision.collider.CompareTag("TownMonster"))
+    //    {
+    //        string EnemyName = collision.collider.gameObject.name;
+    //        EnemyName = EnemyName.Replace("(Clone)","");
+    //        SpawnManager.instance.GetNameOfPrefab(EnemyName + "_B");
+    //        Debug.Log($"[PlayerCollision] : 마을에서 {EnemyName}과 충돌");
+    //        collision.gameObject.SetActive(false);
+    //        GameManager.instance.MoveBattleField();
+    //    }
 
-        if(collision.collider.CompareTag("Portal"))
-        {
-            GameManager.instance.MoveTown();
-        }
-    }
-
-    
-    private void OnTriggerEnter(Collider other)
-    {
-        //if(other.CompareTag("BattleMonster"))
-        //{
-        //    LivingEntity life = other.GetComponent<LivingEntity>();
-        //    life.OnDamage(10, transform.position);
-        //}
-
-    }
+    //    if(collision.collider.CompareTag("Portal"))
+    //    {
+    //        GameManager.instance.MoveTown();
+    //    }
+    //}
 
     private void OnControllerColliderHit(ControllerColliderHit collision)
     {
@@ -53,6 +42,16 @@ public class PlayerCollision : MonoBehaviour
         if (collision.collider.CompareTag("Portal"))
         {
             GameManager.instance.MoveTown();
+        }
+
+        // 아이템 관련
+        if (collision.collider.CompareTag("Item"))
+        {
+            Dice itemName = collision.gameObject.GetComponent<DropDice>().GiveInfo();
+            Debug.Log($"[PlayerCollision] : 마을에서 {itemName}과 충돌");
+            InventoryManager.instance.GetDice(itemName);
+            collision.gameObject.SetActive(false);
+
         }
     }    
 

@@ -15,7 +15,9 @@ public class InputManager : MonoBehaviour
 
     // 내부에서만 값 할당이 가능하도록
     public float moveX { get; private set; }   // 감지된 움직임 입력값 
-    public float moveZ { get; private set; } 
+    public float moveZ { get; private set; }
+
+   
 
     /**********************************************************
     * 설명 : 매 프레임마다 사용자 입력 감지
@@ -23,7 +25,8 @@ public class InputManager : MonoBehaviour
     private void Update()
     {       
         moveX = Input.GetAxis(moveXName);     
-        moveZ = -1 * Input.GetAxis(moveZName); 
+        moveZ = -1 * Input.GetAxis(moveZName);
+     
     }
 
     /**********************************************************
