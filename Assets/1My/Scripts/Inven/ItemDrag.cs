@@ -34,7 +34,7 @@ public class ItemDrag : MonoBehaviour
 
         curDice = slot.dice;
         int[] i = InventoryManager.instance.NearSlot(Input.mousePosition);
-        InventoryManager.instance.HideDice(i[1]);
+        InventoryManager.instance.RemoveDice(i[1]);
 
         dragImage.transform.position = Input.mousePosition;
 
@@ -72,7 +72,15 @@ public class ItemDrag : MonoBehaviour
         int[] i = InventoryManager.instance.NearSlot(Input.mousePosition);
         Debug.Log($"[ItemDrag] 추가할 다이스 뭐임 {curDice}");
 
-        InventoryManager.instance.DropDice(i[1], curDice);
+        if (i[0] == 4)
+        {
+            InventoryManager.instance.DropDice(i[1], curDice);
+        }
+        else
+        {
+            InventoryManager.instance.AddIntactDice(curDice, i[0]);
+        }
+        
     }
 
     /**********************************************************

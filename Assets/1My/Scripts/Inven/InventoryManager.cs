@@ -62,7 +62,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     /**********************************************************
-    * 설명 : 아이템을 가방에 넣음
+    * 설명 : 주사위를 가방에 넣음
     ***********************************************************/
     public void GetDice(Dice dice)
     {
@@ -77,11 +77,34 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void HideDice(int index)
+    /**********************************************************
+    * 설명 : 선택한 주사위를 지움  
+    ***********************************************************/
+    public void RemoveDice(int index)
     {
         Debug.Log($"[InventoryManager].HideDice() index? {index}");
         dices.RemoveAt(index);
         FreshSlot();
+    }
+
+    public void RemoveDice(int slotNum, int index)
+    {
+        if(slotNum == 1)
+        {
+            intactDice1.RemoveAt(index);
+            Debug.Log($"[InventoryManager].초기화");
+            FreshIntactSlot(slotNum);
+        }
+        if (slotNum == 2)
+        {
+            intactDice2.RemoveAt(index);
+            FreshIntactSlot(slotNum);
+        }
+        if (slotNum == 3)
+        {
+            intactDice3.RemoveAt(index);
+            FreshIntactSlot(slotNum);
+        }
     }
 
     /**********************************************************
@@ -99,7 +122,6 @@ public class InventoryManager : MonoBehaviour
     ***********************************************************/
     public int[] NearSlot(Vector3 pos)
     {
-
         float min = 10000f;
         int slotNum = -1;
         int index = -1;
@@ -161,7 +183,7 @@ public class InventoryManager : MonoBehaviour
         //    return godata;
         //}
 
-        Debug.Log($"[InventoryManager]. NearSlot() index? {index}");
+        Debug.Log($"[InventoryManager]. 슬롯넘버:{slotNum}, 인덱스:{index}");
         int[] godata = { slotNum, index };
         return godata;
     }
@@ -213,6 +235,19 @@ public class InventoryManager : MonoBehaviour
                 Debug.Log("장비창이 꽉 참");
             }
         }
+
+        if(slotNum == 4)
+        {
+            if (dices.Count < bagslots.Length)
+            {
+                dices.Add(dice);
+                FreshSlot();
+            }
+            else
+            {
+                Debug.Log("가방이 꽉 참");
+            }
+        }
     }
 
     /**********************************************************
@@ -223,9 +258,13 @@ public class InventoryManager : MonoBehaviour
         if(slotNum == 1)
         {
             int i = 0;
-            for(; i <intactDice1.Count && i < diceSlot1.Length; i++)
+            for(; i < intactDice1.Count && i < diceSlot1.Length; i++)
             {
                 diceSlot1[i].Dice = intactDice1[i];
+            }
+            for(; i < diceSlot1.Length; i++)
+            {
+                diceSlot1[i].Dice = null;
             }
         }
         if (slotNum == 2)
@@ -235,6 +274,10 @@ public class InventoryManager : MonoBehaviour
             {
                 diceSlot2[i].Dice = intactDice2[i];
             }
+            for (; i < diceSlot2.Length; i++)
+            {
+                diceSlot2[i].Dice = null;
+            }
         }
         if (slotNum == 3)
         {
@@ -242,6 +285,10 @@ public class InventoryManager : MonoBehaviour
             for (; i <intactDice3.Count && i < diceSlot3.Length; i++)
             {
                 diceSlot3[i].Dice = intactDice3[i];
+            }
+            for (; i < diceSlot3.Length; i++)
+            {
+                diceSlot3[i].Dice = null;
             }
         }
     }
