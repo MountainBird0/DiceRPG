@@ -28,18 +28,23 @@ public class ItemDrag : MonoBehaviour
         {
             return;
         }
-
+        Debug.Log($"[ItemDrag] 슬롯 머임 {slot}");
         dragImage.gameObject.SetActive(true);
-        //float size = slot.transform.GetComponent<RectTransform>)().sizeDelta.x
-        emptyImage.sprite = slot.Dice.image;
-        //slot.dice.image = null;
-        int i = InventoryManager.instance.NearSlot(Input.mousePosition);
-        Debug.Log($"[ItemDrag] i값은? {i}");
-        curDice = slot.Dice;
-        InventoryManager.instance.OutDice(i);
-        //InventoryManager.instance.FreshSlot();
+        emptyImage.sprite = slot.dice.image;
+
+        curDice = slot.dice;
+        int[] i = InventoryManager.instance.NearSlot(Input.mousePosition);
+        InventoryManager.instance.HideDice(i[1]);
+
         dragImage.transform.position = Input.mousePosition;
 
+        //InventoryManager.instance.FreshSlot();
+        //int i = InventoryManager.instance.NearSlot(Input.mousePosition);
+        // Debug.Log($"[ItemDrag] i값은? {i}");
+        // curDice = slot.dice;
+        //// InventoryManager.instance.OutDice(i);
+        // InventoryManager.instance.TransForward(i);
+        // //
     }
 
     /**********************************************************
@@ -63,8 +68,11 @@ public class ItemDrag : MonoBehaviour
         {
             return;
         }
-        InventoryManager.instance.Drop(curDice, Input.mousePosition);
-        //InventoryManager.instance.Swap(slot, dragImage.transform.position);
+
+        int[] i = InventoryManager.instance.NearSlot(Input.mousePosition);
+        Debug.Log($"[ItemDrag] 추가할 다이스 뭐임 {curDice}");
+
+        InventoryManager.instance.DropDice(i[1], curDice);
     }
 
     /**********************************************************
@@ -72,12 +80,13 @@ public class ItemDrag : MonoBehaviour
     ***********************************************************/
     public void Up()
     {
-        //if (!slot.IsSlot())
-        //{
-        //    return;
-        //}
-        
+        if (!slot.IsSlot())
+        {
+            return;
+        }
+
         dragImage.gameObject.SetActive(false);
+        //InventoryManager.instance.FreshSlot();
         //slot.image.sprite = emptyImage.sprite;
     }
 }

@@ -26,6 +26,7 @@ public class Slot : MonoBehaviour
             }
             else
             {
+                image.sprite = null;
                 image.color = new Color(1, 1, 1, 0);
                 isSlot = false;
             }

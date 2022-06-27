@@ -1261,7 +1261,7 @@ GameObject:
   - component: {fileID: 44649422}
   - component: {fileID: 44649421}
   m_Layer: 5
-  m_Name: SlotItem
+  m_Name: SlotItem7
   m_TagString: Bag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3692,7 +3692,7 @@ GameObject:
   - component: {fileID: 125387948}
   - component: {fileID: 125387947}
   m_Layer: 5
-  m_Name: SlotItem
+  m_Name: SlotItem5
   m_TagString: Bag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6918,7 +6918,7 @@ GameObject:
   - component: {fileID: 340107247}
   - component: {fileID: 340107246}
   m_Layer: 5
-  m_Name: SlotItem
+  m_Name: SlotItem4
   m_TagString: Bag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13007,7 +13007,7 @@ GameObject:
   - component: {fileID: 597961714}
   - component: {fileID: 597961713}
   m_Layer: 5
-  m_Name: SlotItem
+  m_Name: SlotItem3
   m_TagString: Bag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14057,7 +14057,7 @@ GameObject:
   - component: {fileID: 642776041}
   - component: {fileID: 642776040}
   m_Layer: 5
-  m_Name: SlotItem
+  m_Name: SlotItem8
   m_TagString: Bag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22239,6 +22239,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -305
       objectReference: {fileID: 0}
+    - target: {fileID: 564328518, guid: b5359163421b34643bfbaa4950fee6af, type: 3}
+      propertyPath: m_Name
+      value: SlotItem0
+      objectReference: {fileID: 0}
     - target: {fileID: 575221069, guid: b5359163421b34643bfbaa4950fee6af, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -24699,7 +24703,7 @@ GameObject:
   - component: {fileID: 1053512131}
   - component: {fileID: 1053512130}
   m_Layer: 5
-  m_Name: SlotItem
+  m_Name: SlotItem1
   m_TagString: Bag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34568,7 +34572,7 @@ GameObject:
   - component: {fileID: 1467432203}
   - component: {fileID: 1467432202}
   m_Layer: 5
-  m_Name: SlotItem
+  m_Name: SlotItem9
   m_TagString: Bag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39876,7 +39880,7 @@ GameObject:
   - component: {fileID: 1712767221}
   - component: {fileID: 1712767220}
   m_Layer: 5
-  m_Name: SlotItem
+  m_Name: SlotItem6
   m_TagString: Bag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44827,7 +44831,7 @@ GameObject:
   - component: {fileID: 1896083847}
   - component: {fileID: 1896083846}
   m_Layer: 5
-  m_Name: SlotItem
+  m_Name: SlotItem10
   m_TagString: Bag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47956,7 +47960,7 @@ GameObject:
   - component: {fileID: 2037839457}
   - component: {fileID: 2037839456}
   m_Layer: 5
-  m_Name: SlotItem
+  m_Name: SlotItem2
   m_TagString: Bag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

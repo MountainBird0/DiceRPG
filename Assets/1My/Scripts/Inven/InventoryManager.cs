@@ -43,14 +43,7 @@ public class InventoryManager : MonoBehaviour
             Debug.LogWarning("씬에 두개 이상의 InventoryManager 존재합니다!");
             Destroy(gameObject);
         }
-
     }
-
-    private void Update()
-    {
-
-    }
-
 
     /**********************************************************
     * 설명 :인벤토리 상태 갱신
@@ -84,112 +77,267 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    /**********************************************************
-    * 설명 : 그 부분의 아이템을 제거
-    ***********************************************************/
-    public void OutDice(int index)
+    public void HideDice(int index)
     {
+        Debug.Log($"[InventoryManager].HideDice() index? {index}");
         dices.RemoveAt(index);
+        FreshSlot();
+    }
+
+    /**********************************************************
+    * 설명 : 다이스를 내림
+    ***********************************************************/
+    public void DropDice(int index, Dice dice)
+    {
+        dices.Insert(index, dice);
+        //dices.Add(dice);
         FreshSlot();
     }
 
     /**********************************************************
     * 설명 : 마우스와 가까운 슬롯을 반환
     ***********************************************************/
-    public int NearSlot(Vector3 pos)
+    public int[] NearSlot(Vector3 pos)
     {
-        float min = 10000;
+
+        float min = 10000f;
+        int slotNum = -1;
         int index = -1;
 
-        int count = dices.Count;
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < bagslots.Length; i++)
         {
             Vector2 sPos = bagslots[i].transform.position;
+            float dis = Vector2.Distance(sPos, pos);
+            
+            if (dis < min)
+            {
+                min = dis;
+                slotNum = 4;
+                index = i;             
+            }
+        }
+
+        for (int i = 0; i < diceSlot1.Length; i++)
+        {
+            Vector2 sPos = diceSlot1[i].transform.position;
             float dis = Vector2.Distance(sPos, pos);
 
             if (dis < min)
             {
                 min = dis;
+                slotNum = 1;
                 index = i;
             }
         }
 
-        if (min > dices.Count)
+        for (int i = 0; i < diceSlot2.Length; i++)
         {
-            return 0;
+            Vector2 sPos = diceSlot2[i].transform.position;
+            float dis = Vector2.Distance(sPos, pos);
+
+            if (dis < min)
+            {
+                min = dis;
+                slotNum = 2;
+                index = i;
+            }
         }
-        return index;
+
+        for (int i = 0; i < diceSlot3.Length; i++)
+        {
+            Vector2 sPos = diceSlot3[i].transform.position;
+            float dis = Vector2.Distance(sPos, pos);
+
+            if (dis < min)
+            {
+                min = dis;
+                slotNum = 3;
+                index = i;
+            }
+        }
+
+        //if (min > dices.Count)
+        //{
+        //    return godata;
+        //}
+
+        Debug.Log($"[InventoryManager]. NearSlot() index? {index}");
+        int[] godata = { slotNum, index };
+        return godata;
     }
 
+    //////////////
+    /// 주사위 1 완성
+    /////////////
+
     /**********************************************************
-    * 설명 : 아이템을 원하는 위치에 드롭
+    * 설명 : 장비창에 주사위를 장착
     ***********************************************************/
-    public void Drop(Dice dice, Vector3 pos)
+    public void AddIntactDice(Dice dice, int slotNum)
     {
-        int startSlot = NearSlot(Input.mousePosition);
-        Debug.Log($"[InventoryManager] startSlot값은? {startSlot}");
-        int i = startSlot;
-        Debug.Log($"[InventoryManager] i값은? {i}");
-        dices.Insert(i, dice);
-        //bagslots[i].Dice = slot.Dice;
-
-        for (; i < dices.Count && i < bagslots.Length; i++)
-        {
-            bagslots[i+1].Dice = dices[i];
+        if (slotNum == 1)
+        { 
+            if(intactDice1.Count < diceSlot1.Length)
+            {
+                intactDice1.Add(dice);
+                FreshIntactSlot(slotNum);
+            }
+            else
+            {
+                Debug.Log("장비창이 꽉 참");
+            }
         }
-        i += 1;
-        for (; i < bagslots.Length; i++)
+
+        if (slotNum == 2)
         {
-            bagslots[i].Dice = null;
+            if (intactDice2.Count < diceSlot2.Length)
+            {
+                intactDice2.Add(dice);
+                FreshIntactSlot(slotNum);
+            }
+            else
+            {
+                Debug.Log("장비창이 꽉 참");
+            }
+        }
+
+        if (slotNum == 3)
+        {
+            if (intactDice3.Count < diceSlot3.Length)
+            {
+                intactDice3.Add(dice);
+                FreshIntactSlot(slotNum);
+            }
+            else
+            {
+                Debug.Log("장비창이 꽉 참");
+            }
         }
     }
 
-    //public void FreshSlot()
-    //{
-    //    int i = 0;
-    //    for (; i < dices.Count && i < bagslots.Length; i++)
-    //    {
-    //        bagslots[i].Dice = dices[i];
-    //    }
-    //    for (; i < bagslots.Length; i++)
-    //    {
-    //        bagslots[i].Dice = null;
-    //    }
-    //}
-
-
     /**********************************************************
+    * 설명 : 장비창 정리
+    ***********************************************************/
+    public void FreshIntactSlot(int slotNum)
+    {
+        if(slotNum == 1)
+        {
+            int i = 0;
+            for(; i <intactDice1.Count && i < diceSlot1.Length; i++)
+            {
+                diceSlot1[i].Dice = intactDice1[i];
+            }
+        }
+        if (slotNum == 2)
+        {
+            int i = 0;
+            for (; i <intactDice2.Count && i < diceSlot2.Length; i++)
+            {
+                diceSlot2[i].Dice = intactDice2[i];
+            }
+        }
+        if (slotNum == 3)
+        {
+            int i = 0;
+            for (; i <intactDice3.Count && i < diceSlot3.Length; i++)
+            {
+                diceSlot3[i].Dice = intactDice3[i];
+            }
+        }
+    }
+}
+
+
+/**********************************************************
     * 설명 : 아이템을 스왑
     ***********************************************************/
-    public void Swap(Slot slot, Vector3 pos)
-    {
-        //Debug.Log($"[InventoryManager] 스왑 함수 시작부분");
-        //Slot firstSlot = NearSlot(pos);
-        //Debug.Log($"[InventoryManager] 시작슬롯? : {firstSlot}");
+//public void Swap(Slot slot, Vector3 pos)
+//{
+//    //Debug.Log($"[InventoryManager] 스왑 함수 시작부분");
+//    //Slot firstSlot = NearSlot(pos);
+//    //Debug.Log($"[InventoryManager] 시작슬롯? : {firstSlot}");
 
 
-        //if (slot == firstSlot || firstSlot == null)
-        //{
-        //    return;
-        //}
+//    //if (slot == firstSlot || firstSlot == null)
+//    //{
+//    //    return;
+//    //}
 
-        //if (!firstSlot.IsSlot())
-        //{
-        //    Debug.Log($"[InventoryManager] 스왑 함수 실행");
-        //    Swap(firstSlot, slot);
-        //}
-        //else
-        //{
-        //    Swap(slot, firstSlot);
-        //}
-    }
+//    //if (!firstSlot.IsSlot())
+//    //{
+//    //    Debug.Log($"[InventoryManager] 스왑 함수 실행");
+//    //    Swap(firstSlot, slot);
+//    //}
+//    //else
+//    //{
+//    //    Swap(slot, firstSlot);
+//    //}
+//}
 
-    private void Swap(Slot first, Slot second)
-    {
-        Slot temp = null;
-        temp.image = first.image;
-        first.image = second.image;
-        second.image = first.image;
-    }
+//private void Swap(Slot first, Slot second)
+//{
+//    Slot temp = null;
+//    temp.image = first.image;
+//    first.image = second.image;
+//    second.image = first.image;
+//}
 
-}
+/**********************************************************
+   * 설명 : 그 부분의 아이템을 제거
+   ***********************************************************/
+////public void OutDice(int index)
+////{
+////    dices.RemoveAt(index);
+////    FreshSlot();
+//}
+
+/**********************************************************
+    * 설명 : 아이템을 원하는 위치에 드롭
+    ***********************************************************/
+//public void Drop(Dice dice, Vector3 pos)
+//{
+//    //int startSlot = NearSlot(Input.mousePosition);
+//    //Debug.Log($"[InventoryManager] startSlot값은? {startSlot}");
+//    //int i = startSlot;
+//    //Debug.Log($"[InventoryManager] i값은? {i}");
+//    //dices.Insert(i, dice);
+//    //Debug.Log($"[InventoryManager] dice값은? {dice}");
+
+//    //bagslots[i].Dice = dice;
+
+//    //for (; i < dices.Count && i < bagslots.Length; i++)
+//    //{
+//    //    bagslots[i+1].Dice = dices[i];
+//    //}
+//    //i += 1;
+//    //for (; i < bagslots.Length; i++)
+//    //{
+//    //    bagslots[i].Dice = null;
+//    //}
+//    //FreshSlot();
+//}
+
+//public void FreshSlot()
+//{
+//    int i = 0;
+//    for (; i < dices.Count && i < bagslots.Length; i++)
+//    {
+//        bagslots[i].Dice = dices[i];
+//    }
+//    for (; i < bagslots.Length; i++)
+//    {
+//        bagslots[i].Dice = null;
+//    }
+//}
+
+//public void TransForward(int index)
+//{
+//    for (int i = index; i < dices.Count; i++)
+//    {
+//        bagslots[i+1].transform.SetSiblingIndex(i);
+//        //bagslots[i+1].transform.SetAsLastSibling();
+//    }
+//    FreshSlot();
+
+//    //bagslots[1].transform.SetSiblingIndex(2);
+//}
