@@ -1,9 +1,16 @@
+/******************************************************************************
+* 작 성 일 : 2022-06-27
+* 내    용 : 전체적인 인벤토리를 관리
+* 수 정 일 :
+*******************************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
+    public Dice startDice;
+
     public List<Dice> intactDice1;
     public List<Dice> intactDice2;
     public List<Dice> intactDice3;
@@ -43,6 +50,21 @@ public class InventoryManager : MonoBehaviour
             Debug.LogWarning("씬에 두개 이상의 InventoryManager 존재합니다!");
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        Debug.Log("[InventoryManager] 실행되니?");
+        for (int i = 0; i < diceSlot1.Length; i++)
+        {
+            intactDice1.Add(startDice);
+            intactDice2.Add(startDice);
+            intactDice3.Add(startDice);
+        }
+        FreshIntactSlot(1);
+        FreshIntactSlot(2);
+        FreshIntactSlot(3);
+        FreshSlot();
     }
 
     /**********************************************************
