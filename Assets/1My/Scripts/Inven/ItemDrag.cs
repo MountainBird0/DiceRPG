@@ -12,6 +12,8 @@ public class ItemDrag : MonoBehaviour
 
     private Dice curDice;
 
+    private bool isCatch = false;
+
     private void Awake()
     {       
         //dragImage = GameObject.FindGameObjectWithTag("Drag").transform;
@@ -24,7 +26,7 @@ public class ItemDrag : MonoBehaviour
     ***********************************************************/
     public void Down()
     {
-        if (!slot.IsSlot())
+        if (!slot.IsSlot() && !isCatch)
         {
             return;
         }
@@ -36,6 +38,7 @@ public class ItemDrag : MonoBehaviour
         int[] i = InventoryManager.instance.NearSlot(Input.mousePosition);
         InventoryManager.instance.RemoveDice(i[1]);
 
+        isCatch = true;
         dragImage.transform.position = Input.mousePosition;
 
         //InventoryManager.instance.FreshSlot();
@@ -52,7 +55,7 @@ public class ItemDrag : MonoBehaviour
     ***********************************************************/
     public void Drag()
     {
-        if(!slot.IsSlot())
+        if(!slot.IsSlot() && !isCatch)
         {
             return;
         }
@@ -64,7 +67,7 @@ public class ItemDrag : MonoBehaviour
     ***********************************************************/
     public void DragEnd()
     {
-        if (!slot.IsSlot())
+        if (!slot.IsSlot() && !isCatch)
         {
             return;
         }
@@ -88,11 +91,12 @@ public class ItemDrag : MonoBehaviour
     ***********************************************************/
     public void Up()
     {
-        if (!slot.IsSlot())
+        if (!slot.IsSlot() && !isCatch)
         {
             return;
         }
 
+        //isCatch = false;
         dragImage.gameObject.SetActive(false);
         //InventoryManager.instance.FreshSlot();
         //slot.image.sprite = emptyImage.sprite;

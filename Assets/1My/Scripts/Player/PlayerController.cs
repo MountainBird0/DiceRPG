@@ -99,7 +99,6 @@ public class PlayerController : LivingEntity
         //if (attackTarget == null)
         //    return;
 
-
         weaponList.CurrentWeapon.ExecuteAttack(gameObject, attackTarget);
         MonsterHealth targetHp = attackTarget.GetComponent<MonsterHealth>();
         targetHp.UpdateMonHp();
@@ -112,10 +111,15 @@ public class PlayerController : LivingEntity
     public CircleRangeSkill rubyAttack;
     public void RubyAttack()
     {
-        Debug.Log("[PlayerController]플레이어 스킬1사용");
         playerAnimator.SetTrigger("Skill1");
         rubyAttack.Fire(gameObject, transform.position, 10);
+    }
 
+    public CircleRangeSkill groundSlap;
+    public void GroundSlap()
+    {
+        playerAnimator.SetTrigger("Skill1");
+        groundSlap.Fire(gameObject, transform.position, 10);
     }
 
     public StartPlayerSkill lineShot;

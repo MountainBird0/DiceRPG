@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
     ***********************************************************/
     IEnumerator GoBattleField()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.2f);
         var prefab = GameObject.FindGameObjectWithTag("Player");
         var startPoint = GameObject.FindGameObjectWithTag("StartPoint");
         lastTowntransform = prefab.transform.position;
@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
     ***********************************************************/
     IEnumerator GoTown()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.2f);
         var prefab = GameObject.FindGameObjectWithTag("Player");
         prefab.transform.position = lastTowntransform;
         prefab.GetComponent<CharacterController>().enabled = true;

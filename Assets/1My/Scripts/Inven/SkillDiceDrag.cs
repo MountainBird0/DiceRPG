@@ -17,6 +17,10 @@ public class SkillDiceDrag : MonoBehaviour
     private Image emptyImage;
     private Slot slot;
 
+    private bool isCatch = false;
+
+    public int diceNum;
+
     private void Awake()
     {
         emptyImage = dragImage.GetComponent<Image>();
@@ -28,15 +32,17 @@ public class SkillDiceDrag : MonoBehaviour
     ***********************************************************/
     public void Down()
     {
-        if (!slot.IsSlot())
+        if (!slot.IsSlot() && !isCatch)
         {
             return;
         }
         dragImage.gameObject.SetActive(true);
         emptyImage.sprite = slot.dice.image;
-
-        slot.dice.image = null;
+        diceNum = slot.dice.diceNum;
+        isCatch = true;
+        slot.Dice = null;
         //skillDiceManager.RemoveDice();
+
         dragImage.transform.position = Input.mousePosition;
     }
 
@@ -45,13 +51,37 @@ public class SkillDiceDrag : MonoBehaviour
     ***********************************************************/
     public void Drag()
     {
-        if (!slot.IsSlot())
+        if (!slot.IsSlot() && !isCatch)
         {
             return;
         }
-        dragImage.transform.position = Input.mousePosition;
-        //slot.dice = null;
-        
+        dragImage.transform.position = Input.mousePosition;      
+    }
+
+    /**********************************************************
+    * 설명 : 드래그 종료
+    ***********************************************************/
+    public void DragEnd()
+    {
+        if (!slot.IsSlot() && !isCatch)
+        {
+            return;
+        }
+
+        int i = skillDiceManager.NearSlot(Input.mousePosition);
+        skillDiceManager.ChangeImage(i, diceNum);
+    }
+
+    /**********************************************************
+    * 설명 : 마우스 버튼을 땠을 때
+    ***********************************************************/
+    public void Up()
+    {
+        if (!slot.IsSlot() && !isCatch)
+        {
+            return;
+        }
+        dragImage.gameObject.SetActive(false);
     }
 
 }

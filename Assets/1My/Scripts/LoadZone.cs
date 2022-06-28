@@ -59,7 +59,7 @@ public class LoadZone : MonoBehaviour
     ***********************************************************/
     private int SelectMonster()
     {
-        int num = UnityEngine.Random.Range(0, 2);
+        int num = UnityEngine.Random.Range(0, monsters.Length);
         return num;
     }
 

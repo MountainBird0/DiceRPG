@@ -57,6 +57,27 @@ public class StartPlayerSkill : AttackDefinition
             }
         }
 
+        startPoint.z = go.transform.position.x + 2;
+        cols = Physics.OverlapBox(startPoint, range);
+        foreach (var col in cols)
+        {
+            if (col.gameObject == caster)
+                continue;
+
+            var attackables = col.GetComponentsInChildren<IAttackable>();
+            if (attackables.Length == 0)
+                continue;
+
+            var aStates = caster.GetComponent<LivingEntity>();
+            var dStates = caster.GetComponent<LivingEntity>();
+
+            var attack = CreateAttack(aStates, dStates);
+            foreach (var attackable in attackables)
+            {
+                attackable.OnAttack(caster, attack);
+            }
+        }
+
         //lineRenderer.SetPosition(0, transform.position);
         //targets = Physics.BoxCastAll(caster.transform.position, range, caster.transform.forward, dir,
         //    100, layerMask);

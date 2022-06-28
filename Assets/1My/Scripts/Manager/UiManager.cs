@@ -16,6 +16,7 @@ public class UiManager : MonoBehaviour
     public GameObject playerHp;
     public GameObject playerAttack;
     public Image hpBar;
+    public GameObject Smithy;
 
     public GameObject inven;
     private bool isInvenOpen = false;
@@ -25,7 +26,6 @@ public class UiManager : MonoBehaviour
      ***********************************************************/
     private void Awake()
     {
-
         if (instance == null)
         {
             instance = this;
@@ -53,11 +53,10 @@ public class UiManager : MonoBehaviour
             {
                 inven.SetActive(false);
                 isInvenOpen = false;
+                //InventoryManager.instance.FreshSmithySlot();
             }
         }
-
     }
-
 
     /**********************************************************
     * 설명 : 현재 씬에 따라 UI 활성화
@@ -70,8 +69,14 @@ public class UiManager : MonoBehaviour
     {
         playerAttack.SetActive(tf);
     }
-
-
+    public void SetSmithy(bool tf)
+    {
+        Smithy.SetActive(tf);
+    }
+    public void OnClickExit()
+    {
+        Smithy.SetActive(false);
+    }
 
 
     public void UpdatePlayerHp(float curHp, float maxHp)
@@ -79,7 +84,6 @@ public class UiManager : MonoBehaviour
         //Hpbar.transform.localScale = new Vector3(1 * (player.GetComponent<PlayerHealth>().currentHealth
           //      / player.GetComponent<PlayerHealth>().maxHealth), 1, 1);
         hpBar.fillAmount = curHp / maxHp;
-
     }
 
     public void OnClickNewStart()
@@ -109,6 +113,16 @@ public class UiManager : MonoBehaviour
         var player = GameObject.FindGameObjectWithTag("Player");
         player.GetComponent<PlayerController>().LineShot();
     }
+
+    //public void OnClickSkillSlot1()
+    //{
+    //    //Debug.Log("[UiManager]스킬버튼 누름");
+
+    //    var player = GameObject.FindGameObjectWithTag("Player");
+    //    player.GetComponent<PlayerController>().RubyAttack();
+    //    // gameObject.GetComponent<Image>().sprite
+    //    //    = Resources.Load("Skill/RedIcon", typeof(Sprite)) as Sprite;
+    //}
 }
 
 //GetComponent<Button>().interactable = true;

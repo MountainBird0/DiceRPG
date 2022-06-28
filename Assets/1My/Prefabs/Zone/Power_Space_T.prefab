@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 199727979123713475}
   m_Layer: 0
   m_Name: Power_Space_T
-  m_TagString: Untagged
+  m_TagString: PowerZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -5,26 +5,34 @@
 *******************************************************************************/
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-    public Dice startDice;
+    private UserData userdata;
+
+    public Dice startDice1;
+    public Dice startDice2;
+    public Dice startDice3;
 
     public List<Dice> intactDice1;
     public List<Dice> intactDice2;
     public List<Dice> intactDice3;
+
     public List<Dice> dices;
 
     [SerializeField] private Transform diceSlotParent1;
     [SerializeField] private Transform diceSlotParent2;
     [SerializeField] private Transform diceSlotParent3;
     [SerializeField] private Transform bagSlotsParent;
+    [SerializeField] private Transform smithyParent;
 
     [SerializeField] private Slot[] diceSlot1;
     [SerializeField] private Slot[] diceSlot2;
     [SerializeField] private Slot[] diceSlot3;
-    [SerializeField] private Slot[] bagslots;
+    [SerializeField] private Slot[] bagSlots;
+    [SerializeField] private Slot[] smithySlots;
 
     public static InventoryManager instance;
 
@@ -33,7 +41,8 @@ public class InventoryManager : MonoBehaviour
         diceSlot1 = diceSlotParent1.GetComponentsInChildren<Slot>();
         diceSlot2 = diceSlotParent2.GetComponentsInChildren<Slot>();
         diceSlot3 = diceSlotParent3.GetComponentsInChildren<Slot>();
-        bagslots = bagSlotsParent.GetComponentsInChildren<Slot>();
+        bagSlots = bagSlotsParent.GetComponentsInChildren<Slot>();
+        smithySlots = smithyParent.GetComponentsInChildren<Slot>();
     }
 
     /**********************************************************
@@ -50,16 +59,43 @@ public class InventoryManager : MonoBehaviour
             Debug.LogWarning("씬에 두개 이상의 InventoryManager 존재합니다!");
             Destroy(gameObject);
         }
+        userdata = GetComponentInParent<UserData>();
+        Debug.Log($"[InventoryManager] 유저데이터 찾았니?{userdata}");
+    }
+
+    public void OnEnable()
+    {
+        //SmithyManager.instance.FreshEvenSlot();
+        //for (int i = 0; i < bagSlots.Length; i++)
+        //{
+        //    if (bagSlots[i].Dice == null)
+        //        break;
+        //    dices.Add(bagSlots[i].Dice);
+        //}
+        for (int i = 0; i < userdata.dices.Count; i++)
+        {
+            dices.Add(userdata.dices[i]);
+        }
+        FreshSlot();
+    }
+
+    public void OnDisable()
+    {
+        userdata.dices.Clear();
+        for(int i = 0; i < dices.Count; i++)
+        {
+            userdata.dices.Add(dices[i]);
+        }
+        dices.Clear();
     }
 
     private void Start()
     {
-        Debug.Log("[InventoryManager] 실행되니?");
         for (int i = 0; i < diceSlot1.Length; i++)
         {
-            intactDice1.Add(startDice);
-            intactDice2.Add(startDice);
-            intactDice3.Add(startDice);
+            intactDice1.Add(startDice1);
+            intactDice2.Add(startDice2);
+            intactDice3.Add(startDice3);
         }
         FreshIntactSlot(1);
         FreshIntactSlot(2);
@@ -73,13 +109,13 @@ public class InventoryManager : MonoBehaviour
     public void FreshSlot()
     {
         int i = 0;
-        for (; i < dices.Count && i < bagslots.Length; i++)
+        for (; i < dices.Count && i < bagSlots.Length; i++)
         {
-            bagslots[i].Dice = dices[i];
+            bagSlots[i].Dice = dices[i];
         }
-        for (; i < bagslots.Length; i++)
+        for (; i < bagSlots.Length; i++)
         {
-            bagslots[i].Dice = null;
+            bagSlots[i].Dice = null;
         }
     }
 
@@ -88,9 +124,12 @@ public class InventoryManager : MonoBehaviour
     ***********************************************************/
     public void GetDice(Dice dice)
     {
-        if (dices.Count < bagslots.Length)
+        if (dices.Count < bagSlots.Length)
         {
-            dices.Add(dice);
+            //dices.Add(dice);
+            userdata.dices.Add(dice);
+            Debug.Log("유저데이터에 넣음");
+            Debug.Log($"유저데이터 숫자{userdata.dices.Count}");
             FreshSlot();
         }
         else
@@ -111,7 +150,7 @@ public class InventoryManager : MonoBehaviour
 
     public void RemoveDice(int slotNum, int index)
     {
-        if(slotNum == 1)
+        if (slotNum == 1)
         {
             intactDice1.RemoveAt(index);
             Debug.Log($"[InventoryManager].초기화");
@@ -148,16 +187,16 @@ public class InventoryManager : MonoBehaviour
         int slotNum = -1;
         int index = -1;
 
-        for (int i = 0; i < bagslots.Length; i++)
+        for (int i = 0; i < bagSlots.Length; i++)
         {
-            Vector2 sPos = bagslots[i].transform.position;
+            Vector2 sPos = bagSlots[i].transform.position;
             float dis = Vector2.Distance(sPos, pos);
-            
+
             if (dis < min)
             {
                 min = dis;
                 slotNum = 4;
-                index = i;             
+                index = i;
             }
         }
 
@@ -220,8 +259,8 @@ public class InventoryManager : MonoBehaviour
     public void AddIntactDice(Dice dice, int slotNum)
     {
         if (slotNum == 1)
-        { 
-            if(intactDice1.Count < diceSlot1.Length)
+        {
+            if (intactDice1.Count < diceSlot1.Length)
             {
                 intactDice1.Add(dice);
                 FreshIntactSlot(slotNum);
@@ -258,9 +297,9 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        if(slotNum == 4)
+        if (slotNum == 4)
         {
-            if (dices.Count < bagslots.Length)
+            if (dices.Count < bagSlots.Length)
             {
                 dices.Add(dice);
                 FreshSlot();
@@ -277,14 +316,14 @@ public class InventoryManager : MonoBehaviour
     ***********************************************************/
     public void FreshIntactSlot(int slotNum)
     {
-        if(slotNum == 1)
+        if (slotNum == 1)
         {
             int i = 0;
-            for(; i < intactDice1.Count && i < diceSlot1.Length; i++)
+            for (; i < intactDice1.Count && i < diceSlot1.Length; i++)
             {
                 diceSlot1[i].Dice = intactDice1[i];
             }
-            for(; i < diceSlot1.Length; i++)
+            for (; i < diceSlot1.Length; i++)
             {
                 diceSlot1[i].Dice = null;
             }
@@ -314,7 +353,24 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
+
+    /**********************************************************
+    * 설명 : 대장간 인벤 상태 갱신
+    ***********************************************************/
+    public void FreshSmithySlot()
+    {
+        int i = 0;
+        for (; i < dices.Count && i < smithySlots.Length; i++)
+        {
+            smithySlots[i].Dice = dices[i];
+        }
+        for (; i < smithySlots.Length; i++)
+        {
+            smithySlots[i].Dice = null;
+        }
+    }
 }
+
 
 
 /**********************************************************

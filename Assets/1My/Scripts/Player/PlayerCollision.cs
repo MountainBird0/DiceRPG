@@ -44,6 +44,11 @@ public class PlayerCollision : MonoBehaviour
             GameManager.instance.MoveTown();
         }
 
+        if (collision.collider.CompareTag("PowerZone"))
+        {
+            UiManager.instance.SetSmithy(true);
+        }
+
         // 아이템 관련
         if (collision.collider.CompareTag("Item"))
         {

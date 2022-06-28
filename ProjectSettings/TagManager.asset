@@ -18,6 +18,7 @@ TagManager:
   - Dice1
   - Dice3
   - Drag
+  - PowerZone
   layers:
   - Default
   - TransparentFX
