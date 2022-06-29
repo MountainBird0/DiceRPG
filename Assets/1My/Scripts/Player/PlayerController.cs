@@ -7,18 +7,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : LivingEntity
+public class PlayerController : MonoBehaviour //LivingEntity
 {
-    private float playerMoveSpeed = 10.0f;
+    private float playerMoveSpeed = 5.0f;
     private float gravity = 20.0f;
 
-    private Rigidbody playerRigidbody;
     private Animator playerAnimator;
-    private PlayerCollision playerCollision;
     private CharacterController playerController;
-
-    private GameObject attackTarget;
-    private WeaponList weaponList;
 
     private InputManager inputManager;
 
@@ -27,7 +22,14 @@ public class PlayerController : LivingEntity
 
     public LineRenderer playerSkillRange;
 
+    private LivingEntity playerEntity;
+
     private float curHp;
+
+    private bool isSuperArmor = false;
+
+    public GameObject effectPrefabChannelRed;
+    public GameObject effectPrefabRegenerateRed;
 
     /**********************************************************
     * 설명 : 사용할 컴포넌트들의 참조를 불러옴
@@ -35,14 +37,16 @@ public class PlayerController : LivingEntity
     private void Awake()
     {
         inputManager = GetComponent<InputManager>();
-        playerRigidbody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
         playerController = GetComponent<CharacterController>();
-        playerCollision = GetComponent<PlayerCollision>();
         //DontDestroyOnLoad(gameObject);
 
-        curHp = currentHealth;
+        playerEntity = GetComponent<LivingEntity>();
+
+        curHp = playerEntity.currentHealth;
+        
     }
+
 
     private void Start()
     {
@@ -60,10 +64,13 @@ public class PlayerController : LivingEntity
     ***********************************************************/
     private void Update()
     {
-        if (curHp != currentHealth)
+        if (curHp != playerEntity.currentHealth)
         {
-            playerAnimator.SetTrigger("Damaged");
-            curHp = currentHealth;
+            if(!isSuperArmor)
+            {
+                playerAnimator.SetTrigger("Damaged");
+            }
+            curHp = playerEntity.currentHealth;
         }
 
         moveDir = new Vector3(inputManager.moveX, moveDir.y, inputManager.moveZ);
@@ -84,54 +91,82 @@ public class PlayerController : LivingEntity
     /**********************************************************
     * 설명 : 플레이어의 일반공격
     ***********************************************************/
-    public void ClickAttack()
-    {
-        playerAnimator.SetTrigger("Attack");
-    }
+    //public void ClickAttack()
+    //{
+    //    playerAnimator.SetTrigger("Attack");
+    //}
 
     /**********************************************************
     * 설명 : 플레이어의 일반공격 이벤트
     ***********************************************************/
-    private void Hit()
-    {
-        Debug.Log("플레이어가 때림");
-        Debug.Log(weaponList.CurrentWeapon);
-        //if (attackTarget == null)
-        //    return;
+    //private void Hit()
+    //{
+    //    //Debug.Log("플레이어가 때림");
+    //    //Debug.Log(weaponList.CurrentWeapon);
+    //    //if (attackTarget == null)
+    //    //   return;
 
-        weaponList.CurrentWeapon.ExecuteAttack(gameObject, attackTarget);
-        MonsterHealth targetHp = attackTarget.GetComponent<MonsterHealth>();
-        targetHp.UpdateMonHp();
-        attackTarget = null;
-    }
+    //    //weaponList.CurrentWeapon.ExecuteAttack(gameObject, attackTarget);
+    //    //MonsterHealth targetHp = attackTarget.GetComponent<MonsterHealth>();
+    //    //targetHp.UpdateMonHp();
+    //    //attackTarget = null;
+    //}
 
     /**********************************************************
     * 설명 : 플레이어의 스킬공격
     ***********************************************************/
+    public BasicAttackSkill basicAttack;
+    public void BasicAttack()
+    {
+        playerAnimator.SetTrigger("Attack");
+        basicAttack.Fire(gameObject, transform.position, 10);
+    }
+
     public CircleRangeSkill rubyAttack;
     public void RubyAttack()
     {
         playerAnimator.SetTrigger("Skill1");
-        rubyAttack.Fire(gameObject, transform.position, 10);
+        rubyAttack.Fire(gameObject, transform.position, 8);
     }
 
     public CircleRangeSkill groundSlap;
     public void GroundSlap()
     {
-        playerAnimator.SetTrigger("Skill1");
-        groundSlap.Fire(gameObject, transform.position, 10);
+        isSuperArmor = true;
+        playerMoveSpeed = 7f;
+        playerAnimator.SetTrigger("Dash");
+        Dash();
+        StartCoroutine(RGroundSlap());
+    }
+    private void Dash()
+    {
+        var go = Instantiate(effectPrefabChannelRed, transform.position, transform.rotation);
+        go.transform.position = transform.position;
+        Destroy(go, 2f);
+
+        playerController.Move(gameObject.transform.forward * Time.deltaTime * 2);
+        
+    }
+    IEnumerator RGroundSlap()
+    {
+        yield return new WaitForSeconds(1.7f);
+        Vector3 pos = transform.position + transform.forward;
+        groundSlap.Fire(gameObject, pos, 8);
+        playerMoveSpeed = 3f;
+
+        isSuperArmor=false;
     }
 
     public StartPlayerSkill lineShot;
     public void LineShot()
     {
         Debug.Log("[PlayerController]플레이어 스킬2사용");
-        DrawRangeLineShot();
+        //DrawRangeLineShot();
         lineShot.Fire(gameObject, transform.position, 8);
     }
-    public void DrawRangeLineShot()
-    {
-        playerSkillRange.SetPosition(0, transform.position);
-        playerSkillRange.SetPosition(1, transform.position + transform.forward * 3);
-    }
+    //public void DrawRangeLineShot()
+    //{
+    //    playerSkillRange.SetPosition(0, transform.position);
+    //    playerSkillRange.SetPosition(1, transform.position + transform.forward * 3);
+    //}
 }

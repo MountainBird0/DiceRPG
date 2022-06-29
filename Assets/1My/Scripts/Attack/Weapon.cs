@@ -37,9 +37,10 @@ public class Weapon : AttackDefinition
         // АјАн
         var aStates = attacker.GetComponent<LivingEntity>();
         var dStates = defender.GetComponent<LivingEntity>();
-        var attack = CreateAttack(aStates, dStates);
+        var attack = CreateAttack(aStates);
 
         var attackables = defender.GetComponentsInChildren<IAttackable>();
+        Debug.Log(attackables.Length);
         foreach (var attackable in attackables)
         {
             attackable.OnAttack(attacker, attack);

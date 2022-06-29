@@ -34,7 +34,7 @@ public class DisarmDice : MonoBehaviour
         else
         {
             InventoryManager.instance.RemoveDice(i[0], i[1]);
-            InventoryManager.instance.GetDice(curDice);
+            InventoryManager.instance.AddDice(curDice);
         }
 
 

@@ -19,6 +19,7 @@ TagManager:
   - Dice3
   - Drag
   - PowerZone
+  - HealZone
   layers:
   - Default
   - TransparentFX

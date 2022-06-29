@@ -966,9 +966,7 @@ GameObject:
   - component: {fileID: 3325990611436665860}
   - component: {fileID: 1987829073308266382}
   - component: {fileID: 308073039}
-  - component: {fileID: 6092898993433194798}
   - component: {fileID: -8995464265928446737}
-  - component: {fileID: -4093745394270899775}
   - component: {fileID: 3339154480792556038}
   - component: {fileID: 8252495213618700816}
   - component: {fileID: 2945924655620961140}
@@ -1056,19 +1054,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 0
---- !u!65 &6092898993433194798
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8323697398093905092}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 0.7}
-  m_Center: {x: 0, y: 0.5, z: 0.7}
 --- !u!54 &-8995464265928446737
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1085,20 +1070,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-4093745394270899775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8323697398093905092}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fd5e842649e36a4d8b017ba040439a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hpBar: {fileID: 5253778712146275169}
-  ground: {fileID: 6467216176781997556}
 --- !u!114 &3339154480792556038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1111,6 +1082,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d998fc7b1ad30d4da47b51f951c893d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
 --- !u!114 &8252495213618700816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1155,6 +1127,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 11400000, guid: 01b16969139ac1041ba42bb7ee37103b, type: 2}
   idleWaitTime: 1
+  hpBar: {fileID: 5253778712146275169}
+  ground: {fileID: 6384821678779944541}
 --- !u!1 &8434639278894562985
 GameObject:
   m_ObjectHideFlags: 0
@@ -1269,6 +1243,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HpBar
       objectReference: {fileID: 0}
+    - target: {fileID: 3615704065209800882, guid: 003e43794f4eb0844907538e8e8a63a1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5979079138846998070, guid: 003e43794f4eb0844907538e8e8a63a1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1365,8 +1343,8 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3615704065209800882, guid: 003e43794f4eb0844907538e8e8a63a1, type: 3}
   m_PrefabInstance: {fileID: 8846376265561207763}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6467216176781997556 stripped
+--- !u!1 &6384821678779944541 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 2523298436014982695, guid: 003e43794f4eb0844907538e8e8a63a1, type: 3}
+  m_CorrespondingSourceObject: {fileID: 2476932700735061390, guid: 003e43794f4eb0844907538e8e8a63a1, type: 3}
   m_PrefabInstance: {fileID: 8846376265561207763}
   m_PrefabAsset: {fileID: 0}

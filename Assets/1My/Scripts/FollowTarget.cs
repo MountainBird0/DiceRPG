@@ -30,8 +30,8 @@ public class FollowTarget : MonoBehaviour
             if (target == null)
             {
                 target = GameObject.FindGameObjectWithTag("Player");
-                transform.position = new Vector3(target.transform.position.x * 1.15f,
-                    target.transform.position.y * 2.7f, target.transform.position.z);
+                transform.position = new Vector3(target.transform.position.x * 1.25f,
+                    target.transform.position.y * 3.7f, target.transform.position.z);
 
                 return;
             }

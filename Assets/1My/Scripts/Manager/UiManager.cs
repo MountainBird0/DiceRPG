@@ -64,7 +64,16 @@ public class UiManager : MonoBehaviour
     public void SetPlayerHp(bool tf)
     {
         playerHp.SetActive(tf);
+        inven.SetActive(true);
+        StartCoroutine(InvenOff());
     }
+
+    IEnumerator InvenOff()
+    {
+        yield return new WaitForSeconds(0.1f);      
+        inven.SetActive(false);
+    }
+
     public void SetPlayerAttack(bool tf)
     {
         playerAttack.SetActive(tf);
@@ -81,8 +90,6 @@ public class UiManager : MonoBehaviour
 
     public void UpdatePlayerHp(float curHp, float maxHp)
     {
-        //Hpbar.transform.localScale = new Vector3(1 * (player.GetComponent<PlayerHealth>().currentHealth
-          //      / player.GetComponent<PlayerHealth>().maxHealth), 1, 1);
         hpBar.fillAmount = curHp / maxHp;
     }
 
@@ -95,7 +102,7 @@ public class UiManager : MonoBehaviour
     public void OnClickAttack()
     {
         var player = GameObject.FindGameObjectWithTag("Player");
-        player.GetComponent<PlayerController>().ClickAttack();
+        player.GetComponent<PlayerController>().BasicAttack();
     }
 
     public void OnClickSkill1()

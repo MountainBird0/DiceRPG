@@ -13,12 +13,10 @@ public class StartPlayerSkill : AttackDefinition
     public GameObject effectPrefab;
     public float effectDuration;
 
-    public Vector3 range= new Vector3(1,1,1);
+    public Vector3 range = new Vector3(2, 2, 2);
     public Quaternion dir;
 
     public Vector3 startPoint;
-
-    private RaycastHit[] targets = new RaycastHit[0];
 
     public void Fire(GameObject caster, Vector3 position, int layerMask)
     {
@@ -27,6 +25,7 @@ public class StartPlayerSkill : AttackDefinition
             return;
 
         dir = caster.transform.rotation;
+
         var go = Instantiate(effectPrefab, position, dir);
         Destroy(go, effectDuration);
 
@@ -35,7 +34,6 @@ public class StartPlayerSkill : AttackDefinition
         //go.transform.rotation = rot;
         //StartCoroutine(Delay(go));
 
-
         startPoint = go.transform.position;
         var cols = Physics.OverlapBox(startPoint, range);
         foreach (var col in cols)
@@ -43,21 +41,20 @@ public class StartPlayerSkill : AttackDefinition
             if (col.gameObject == caster)
                 continue;
 
-            var attackables = col.GetComponentsInChildren<IAttackable>();
+            var attackables = col.GetComponentsInChildren<LivingEntity>();
             if (attackables.Length == 0)
                 continue;
 
             var aStates = caster.GetComponent<LivingEntity>();
-            var dStates = caster.GetComponent<LivingEntity>();
 
-            var attack = CreateAttack(aStates, dStates);
+            var attack = CreateAttack(aStates);
             foreach (var attackable in attackables)
             {
                 attackable.OnAttack(caster, attack);
-            }
+            }        
         }
 
-        startPoint.z = go.transform.position.x + 2;
+        startPoint += caster.transform.forward * 2;
         cols = Physics.OverlapBox(startPoint, range);
         foreach (var col in cols)
         {
@@ -69,45 +66,32 @@ public class StartPlayerSkill : AttackDefinition
                 continue;
 
             var aStates = caster.GetComponent<LivingEntity>();
-            var dStates = caster.GetComponent<LivingEntity>();
 
-            var attack = CreateAttack(aStates, dStates);
+            var attack = CreateAttack(aStates);
             foreach (var attackable in attackables)
             {
                 attackable.OnAttack(caster, attack);
             }
         }
 
-        //lineRenderer.SetPosition(0, transform.position);
-        //targets = Physics.BoxCastAll(caster.transform.position, range, caster.transform.forward, dir,
-        //    100, layerMask);
-        //Debug.Log($"[StartPlayerSkill] {targets.Length}");
+        startPoint += caster.transform.forward * 2;
+        cols = Physics.OverlapBox(startPoint, range);
+        foreach (var col in cols)
+        {
+            if (col.gameObject == caster)
+                continue;
 
-        //foreach (var target in targets)
-        //{
-        //    Debug.Log($"[StartPlayerSkill] {targets.Length}");
-        //}
+            var attackables = col.GetComponentsInChildren<IAttackable>();
+            if (attackables.Length == 0)
+                continue;
 
-        //if (true == Physics.BoxCastAll(caster.transform.position, range, caster.transform.forward, dir, 
-        //    3, layerMask))
-        //{
-        //    lineRenderer.SetPosition(1, hitInfo.point);
-        //    var enemy = hitInfo.collider.GetComponent<EnemyHealth>();
+            var aStates = caster.GetComponent<LivingEntity>();
 
-        //    enemy?.TakeDamage(damage, hitInfo.point);
-        //}
-        //else
-        //{
-        //    lineRenderer.SetPosition(1, transform.position + transform.forward * range);
-        //}
-
-
-
-
-
-
-
-
-
+            var attack = CreateAttack(aStates);
+            foreach (var attackable in attackables)
+            {
+                attackable.OnAttack(caster, attack);
+            }
+        }
     }
 }

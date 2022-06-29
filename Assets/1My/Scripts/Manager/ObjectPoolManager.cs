@@ -52,6 +52,7 @@ public class ObjectPoolManager : MonoBehaviour
             for (int i = 0; i < pool.count; i++)
             {
                 var Object = Instantiate(pool.prefab, transform);
+                Debug.Log($"[ObjectPoolManager]»ý¼º:{ Object}");
                 pool.list.Add(Object);
                 Object.transform.localPosition = Vector3.zero;
                 Object.SetActive(false);

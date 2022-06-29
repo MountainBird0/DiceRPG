@@ -5569,6 +5569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fd5e842649e36a4d8b017ba040439a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 0
   hpBar: {fileID: 8201943161842506176}
   ground: {fileID: 7035041822490082556}
 --- !u!114 &2080689314404200665
@@ -5583,6 +5584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d998fc7b1ad30d4da47b51f951c893d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 300
 --- !u!114 &-2603437991180403535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5625,6 +5627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a3f3e7701c418448a45e09dfcb0eaa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 0
   weapon: {fileID: 11400000, guid: b743b33b83030c74597de09ad66a5323, type: 2}
   gauge: {fileID: 7029163725561594137}
   charging: {fileID: 7108978081572919681}

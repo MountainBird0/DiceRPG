@@ -9,24 +9,6 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if(collision.collider.CompareTag("TownMonster"))
-    //    {
-    //        string EnemyName = collision.collider.gameObject.name;
-    //        EnemyName = EnemyName.Replace("(Clone)","");
-    //        SpawnManager.instance.GetNameOfPrefab(EnemyName + "_B");
-    //        Debug.Log($"[PlayerCollision] : 마을에서 {EnemyName}과 충돌");
-    //        collision.gameObject.SetActive(false);
-    //        GameManager.instance.MoveBattleField();
-    //    }
-
-    //    if(collision.collider.CompareTag("Portal"))
-    //    {
-    //        GameManager.instance.MoveTown();
-    //    }
-    //}
-
     private void OnControllerColliderHit(ControllerColliderHit collision)
     {
         if (collision.collider.CompareTag("TownMonster"))
@@ -47,6 +29,15 @@ public class PlayerCollision : MonoBehaviour
         if (collision.collider.CompareTag("PowerZone"))
         {
             UiManager.instance.SetSmithy(true);
+            collision.gameObject.SetActive(false);
+        }
+
+        if (collision.collider.CompareTag("HealZone"))
+        {
+            LivingEntity life = gameObject.GetComponent<LivingEntity>();
+            life.currentHealth += 200;
+            UiManager.instance.UpdatePlayerHp(life.currentHealth, life.maxHealth);
+            collision.gameObject.SetActive(false);
         }
 
         // 아이템 관련
@@ -56,7 +47,6 @@ public class PlayerCollision : MonoBehaviour
             Debug.Log($"[PlayerCollision] : 마을에서 {itemName}과 충돌");
             InventoryManager.instance.GetDice(itemName);
             collision.gameObject.SetActive(false);
-
         }
     }    
 

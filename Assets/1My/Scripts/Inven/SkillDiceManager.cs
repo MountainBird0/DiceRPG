@@ -20,7 +20,7 @@ public class SkillDiceManager : MonoBehaviour
 
     public Button[] skillbuttons;
 
-    public int[] skillActives = {0,0};
+    public int[] skillActives = { 0, 0 };
 
     private int num;
 
@@ -31,17 +31,11 @@ public class SkillDiceManager : MonoBehaviour
         skillDice3 = skillDiceParent3.GetComponentInChildren<Slot>();
     }
 
-    public void Start()
-    {
-        GetRanDice();
-    }
-
     public void Update()
     {
-        if(skillDice1.Dice == null && skillDice2.Dice == null && skillDice3.Dice == null)
+        if (skillDice1.Dice == null && skillDice2.Dice == null && skillDice3.Dice == null)
         {
             GetRanDice();
-
         }
     }
 
@@ -55,7 +49,7 @@ public class SkillDiceManager : MonoBehaviour
 
     public void RemoveDice()
     {
-         //= null;
+        //= null;
     }
 
     /**********************************************************
@@ -63,26 +57,67 @@ public class SkillDiceManager : MonoBehaviour
     ***********************************************************/
     public void ChangeImage(int slotNum, int diceNum)
     {
-        if(slotNum == 0)
+        if (slotNum == 0)
         {
             skillActives[0] = 1;
-            if(diceNum == 1)
+            if (diceNum == 1 || diceNum == 2)
             {
                 skillbuttons[slotNum].GetComponent<Image>().sprite =
                     Resources.Load("Skill/RubyGround", typeof(Sprite)) as Sprite;
             }
 
-            if (diceNum == 2)
+            if (diceNum == 3 || diceNum == 4)
             {
                 skillbuttons[slotNum].GetComponent<Image>().sprite =
                     Resources.Load("Skill/GroundSlam", typeof(Sprite)) as Sprite;
             }
         }
 
+        if (slotNum == 1)
+        {
+            skillActives[1] = 1;
+            if (diceNum == 1 || diceNum == 2)
+            {
+                skillbuttons[slotNum].GetComponent<Image>().sprite =
+                    Resources.Load("Skill/IceShot", typeof(Sprite)) as Sprite;
+            }
+        }
         num = diceNum;
     }
 
+    public void OnClickSkillSlot1()
+    {
+        if (skillActives[0] == 1)
+        {
+            var player = GameObject.FindGameObjectWithTag("Player");
+            if (num == 1 || num == 2)
+            {
+                player.GetComponent<PlayerController>().RubyAttack();
+            }
+            if (num == 3 || num == 4)
+            {
+                player.GetComponent<PlayerController>().GroundSlap();
+            }
+            skillbuttons[0].GetComponent<Image>().sprite =
+                    Resources.Load("Skill/RedIcon", typeof(Sprite)) as Sprite;
+            skillActives[0] = 0;
+        }     
+    }
+    public void OnClickSkillSlot2()
+    {
+        if (skillActives[1] == 1)
+        {
+            var player = GameObject.FindGameObjectWithTag("Player");
+            if (num == 1 || num == 2)
+            {
+                player.GetComponent<PlayerController>().LineShot();
+            }
 
+            skillbuttons[1].GetComponent<Image>().sprite =
+                    Resources.Load("Skill/BlueIcon", typeof(Sprite)) as Sprite;
+            skillActives[1] = 0;
+        }
+    }
 
     /**********************************************************
     * 설명 : 마우스와 가까운 스킬칸을 반환
@@ -97,7 +132,7 @@ public class SkillDiceManager : MonoBehaviour
             Vector2 sPos = skillbuttons[i].transform.position;
             float dis = Vector2.Distance(sPos, pos);
 
-            if(dis < min)
+            if (dis < min)
             {
                 min = dis;
                 ButtonNum = i;
@@ -105,26 +140,4 @@ public class SkillDiceManager : MonoBehaviour
         }
         return ButtonNum;
     }
-
-
-    public void OnClickSkillSlot1()
-    {
-        //Debug.Log("[UiManager]스킬버튼 누름");
-        if(skillActives[0] == 1)
-        {
-            var player = GameObject.FindGameObjectWithTag("Player");
-            if(num == 1)
-            {
-                player.GetComponent<PlayerController>().RubyAttack();
-            }
-            if (num == 2)
-            {
-                player.GetComponent<PlayerController>().GroundSlap();
-            }
-            skillbuttons[0].GetComponent<Image>().sprite =
-                    Resources.Load("Skill/RedIcon", typeof(Sprite)) as Sprite;
-            skillActives[0] = 0;
-        }
-    }
-
 }

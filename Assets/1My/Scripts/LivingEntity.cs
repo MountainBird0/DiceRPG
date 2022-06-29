@@ -10,8 +10,8 @@ using System;
 
 public class LivingEntity : MonoBehaviour, IAttackable
 {
-    public float maxHealth { get; protected set; }
-    public float currentHealth { get; protected set; }
+    public float maxHealth;
+    public float currentHealth { get;  set; }
     public int damage { get; protected set; }
     public bool isDead { get; protected set; }
 
@@ -22,16 +22,27 @@ public class LivingEntity : MonoBehaviour, IAttackable
     ***********************************************************/
     protected virtual void OnEnable()
     {
+        Debug.Log("Enable()", this);
         isDead = false;
-        maxHealth = 100;
         currentHealth = maxHealth;
-        if (gameObject.CompareTag("BattleMonster"))
-        {
-            MonsterHealth targetHp = gameObject.GetComponent<MonsterHealth>();
-            targetHp.UpdateMonHp();
-        }
+        Debug.Log($"[LivingEntity]현재체력{currentHealth},{gameObject}");
+        Debug.Log($"[LivingEntity]최대체력{maxHealth},{gameObject}");
+        //if (gameObject.CompareTag("BattleMonster") && currentHealth != 0)
+        //{
+        //    MonsterHealth targetHp = gameObject.GetComponent<MonsterHealth>();
+        //    targetHp.UpdateMonHp();
+        //}
     }
 
+    //실험용
+    public void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            Debug.Log($"[LivingEntity]현재체력{currentHealth},{gameObject}");
+            Debug.Log($"[LivingEntity]최대체력{maxHealth},{gameObject}");
+        }
+    }
 
     /**********************************************************
     * 설명 : 체력 회복
@@ -63,13 +74,9 @@ public class LivingEntity : MonoBehaviour, IAttackable
     ***********************************************************/
     public void OnAttack(GameObject attacker, Attack attack)
     {
+        Debug.Log($"[LivingEntity]맞기전현재체력{currentHealth},{gameObject}", gameObject);
         currentHealth -= attack.Damage;
         Debug.Log($"[LivingEntity]현재체력{currentHealth}");
-        if (gameObject.CompareTag("BattleMonster"))
-        {
-            MonsterHealth targetHp = gameObject.GetComponent<MonsterHealth>();
-            targetHp.UpdateMonHp();
-        }
 
         if (currentHealth <= 0)
         {

@@ -22,4 +22,12 @@ public class AttackDefinition : ScriptableObject
 
         return new Attack((int)damage);
     }
+
+    public Attack CreateAttack(LivingEntity attacker)
+    {
+        float damage = attacker.damage;
+        damage += Random.Range(minDamage, maxDamage);
+
+        return new Attack((int)damage);
+    }
 }

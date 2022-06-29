@@ -65,13 +65,6 @@ public class InventoryManager : MonoBehaviour
 
     public void OnEnable()
     {
-        //SmithyManager.instance.FreshEvenSlot();
-        //for (int i = 0; i < bagSlots.Length; i++)
-        //{
-        //    if (bagSlots[i].Dice == null)
-        //        break;
-        //    dices.Add(bagSlots[i].Dice);
-        //}
         for (int i = 0; i < userdata.dices.Count; i++)
         {
             dices.Add(userdata.dices[i]);
@@ -130,6 +123,22 @@ public class InventoryManager : MonoBehaviour
             userdata.dices.Add(dice);
             Debug.Log("유저데이터에 넣음");
             Debug.Log($"유저데이터 숫자{userdata.dices.Count}");
+            FreshSlot();
+        }
+        else
+        {
+            Debug.Log("가방이 꽉 참");
+        }
+    }
+
+    /**********************************************************
+    * 설명 : 장비에서 나온 주사위를 가방에 넣음
+    ***********************************************************/
+    public void AddDice(Dice dice)
+    {
+        if (dices.Count < bagSlots.Length)
+        {
+            dices.Add(dice);
             FreshSlot();
         }
         else

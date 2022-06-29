@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public SkillDiceManager skillDiceManager;
     public static GameManager instance;
     private bool bossAlive = false;
 
@@ -54,6 +55,7 @@ public class GameManager : MonoBehaviour
     ***********************************************************/
     public void MoveBattleField()
     {
+        skillDiceManager.GetRanDice();
         var prefab = GameObject.FindGameObjectWithTag("Player");
         prefab.GetComponent<CharacterController>().enabled = false;
         SceneManager.LoadScene("BattleField1");

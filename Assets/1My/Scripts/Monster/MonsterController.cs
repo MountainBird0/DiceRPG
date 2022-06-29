@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MonsterController : LivingEntity
+public class MonsterController : MonoBehaviour
 {
     public enum Status
     {
@@ -77,11 +77,17 @@ public class MonsterController : LivingEntity
 
     private float curHp;
 
+    private LivingEntity monsterEntity;
+
+    public GameObject hpBar;
+    public GameObject ground;
+
     void Awake()
     {
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
-        curHp = currentHealth;
+        monsterEntity = GetComponent<LivingEntity>();
+        curHp = monsterEntity.currentHealth;
     }
 
     private void Start()
@@ -99,10 +105,14 @@ public class MonsterController : LivingEntity
 
     private void Update()
     {
-        if(curHp != currentHealth)
+        hpBar.transform.rotation = Camera.main.transform.rotation;
+        ground.transform.rotation =  Camera.main.transform.rotation;
+
+        if (curHp != monsterEntity.currentHealth)
         {
             animator.SetTrigger("Damaged");
-            curHp = currentHealth;
+            UpdateMonHp();
+            curHp = monsterEntity.currentHealth;
         }
         
 
@@ -133,7 +143,6 @@ public class MonsterController : LivingEntity
                 UpdateDie();
                 break;
         }
-
     }
 
     private void Init()
@@ -197,27 +206,34 @@ public class MonsterController : LivingEntity
                 Debug.Log($"[MonsterController] : {gameObject} hit 이벤트 발생");
                 w.ExecuteAttack(gameObject, target.gameObject);
                 LivingEntity life = target.GetComponent<LivingEntity>();
+                Debug.Log($"[MonsterController] : 타겟은?{target},,불러온 현재체력{life.currentHealth} ,, 최대체력{life.maxHealth}", target);
                 UiManager.instance.UpdatePlayerHp(life.currentHealth, life.maxHealth);
                 break;
         }
         //weapon.ExecuteAttack(gameObject, player.gameObject);
     }
 
-    public override void Die()
+    public void Die()
     {
         
-        base.Die();
         
         animator.SetTrigger("Die");
         StartCoroutine(SetAct());
-
-
     }
+
+
 
     IEnumerator SetAct()
     {
         yield return new WaitForSeconds(2f);
         this.gameObject.SetActive(false);
+
+    }
+
+    public void UpdateMonHp()
+    {
+        Debug.Log("[MonsterHealth] hp바 업데이트");
+        hpBar.transform.localScale = new Vector3(1 * (monsterEntity.currentHealth / monsterEntity.maxHealth), 1, 1);
 
     }
 }

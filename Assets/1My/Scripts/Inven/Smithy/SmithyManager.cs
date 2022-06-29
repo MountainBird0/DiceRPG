@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.UI;
+using TMPro;
 
 public class SmithyManager : MonoBehaviour
 {
@@ -25,10 +27,11 @@ public class SmithyManager : MonoBehaviour
     [SerializeField] private Slot[] bagSlots;
     [SerializeField] private Slot[] smithySlots;
 
+    public TextMeshProUGUI upgradeCountText;
     private int upgradeCount;
 
 
-    private int diceNum;
+    private int earlyDicenum;
 
     private void OnValidate()
     {
@@ -66,6 +69,8 @@ public class SmithyManager : MonoBehaviour
             dices.Add(userdata.dices[i]);
         }
         FreshSmithySlot();
+
+        SetUpgradeCount();
     }
 
     public void OnDisable()
@@ -87,7 +92,8 @@ public class SmithyManager : MonoBehaviour
         //Debug.Log("[SmithyManager] 안비어있나봐");
         if (anvilSlots.Dice == null)
         {
-            
+            earlyDicenum = dice.diceNum;
+
             curDiceNum = dice.diceNum;
             anvilSlots.Dice = dice;
             dices.RemoveAt(index);
@@ -167,11 +173,14 @@ public class SmithyManager : MonoBehaviour
     {
         Debug.Log("[SmithyManager] 강화버튼 누름");
         Debug.Log($"[SmithyManager] {curDiceNum}");
-        if (0 > curDiceNum || curDiceNum > 5)
+        if (0 > curDiceNum || curDiceNum > 5 || upgradeCount == 0)
             return;
 
         anvilSlots.Dice = diceList[curDiceNum];
         curDiceNum = anvilSlots.Dice.diceNum;
+
+        upgradeCount--;
+        upgradeCountText.text = upgradeCount.ToString();
     }
 
     /**********************************************************
@@ -182,17 +191,23 @@ public class SmithyManager : MonoBehaviour
         Debug.Log("[SmithyManager] 다운버튼 누름");
         Debug.Log($"[SmithyManager] {curDiceNum}");
 
-        if (1 > curDiceNum || curDiceNum > 6)
+        if (1 > curDiceNum || curDiceNum > 6 || upgradeCount == 6 ||
+            earlyDicenum == curDiceNum)
             return;
+
         anvilSlots.Dice = diceList[curDiceNum - 2];
         curDiceNum = anvilSlots.Dice.diceNum;
+
+        upgradeCount++;
+        upgradeCountText.text = upgradeCount.ToString();
     }
 
     /**********************************************************
-    * 설명 : 강화 UP버튼 누름
+    * 설명 : 입장했을 때 강화 횟수 설정
     ***********************************************************/
     public void SetUpgradeCount()
     {
         upgradeCount = 6;
+        upgradeCountText.text = upgradeCount.ToString();
     }
 }

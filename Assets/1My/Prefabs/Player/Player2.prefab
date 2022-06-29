@@ -3149,6 +3149,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSkillRange: {fileID: 5000127612481398644}
+  effectPrefabChannelRed: {fileID: 2304078453160844688, guid: c5a26feb0659de245b7c15dcbae79e28, type: 3}
+  effectPrefabRegenerateRed: {fileID: 6393505725717188114, guid: f6508d015bccc274cba198f6b650dbda, type: 3}
+  basicAttack: {fileID: 11400000, guid: 1ff340a6805e46a42817452fdc9b97a3, type: 2}
   rubyAttack: {fileID: 11400000, guid: f2b8f50677addd348914ffcf68f98261, type: 2}
   groundSlap: {fileID: 11400000, guid: c19436835a7534849bff34c138ae1e41, type: 2}
   lineShot: {fileID: 11400000, guid: 17ddc593a3a4061488485cdb9e0e1157, type: 2}
@@ -3176,6 +3179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d998fc7b1ad30d4da47b51f951c893d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 1000
 --- !u!114 &-6992168337815481917
 MonoBehaviour:
   m_ObjectHideFlags: 0
