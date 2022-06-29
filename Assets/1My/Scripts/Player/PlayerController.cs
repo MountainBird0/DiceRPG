@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour //LivingEntity
     IEnumerator RGroundSlap()
     {
         yield return new WaitForSeconds(1.7f);
-        Vector3 pos = transform.position + transform.forward;
+        Vector3 pos = transform.position + transform.forward * 2;
         groundSlap.Fire(gameObject, pos, 8);
         playerMoveSpeed = 3f;
 

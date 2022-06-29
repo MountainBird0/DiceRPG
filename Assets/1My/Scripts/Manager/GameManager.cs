@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
 
     private Vector3 lastTowntransform;
 
-    
 
     /**********************************************************
      * 설명 : 게임 시작과 동시에 싱글톤을 구성
@@ -37,7 +36,6 @@ public class GameManager : MonoBehaviour
 
         //ObjectPoolManager.instance.GetObject("Player");
     }
-
 
     /**********************************************************
     * 설명 : 새로운 게임을 시작함

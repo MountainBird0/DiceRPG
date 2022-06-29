@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6698412074942037662}
   - component: {fileID: 6698412074942037663}
   - component: {fileID: 6698412074942037656}
+  - component: {fileID: 1256545570061497994}
   m_Layer: 0
   m_Name: Dice2
   m_TagString: Item
@@ -26,15 +27,15 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6698412074942037657}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.29883623, y: 0.64085644, z: -0.29883623, w: 0.64085644}
   m_LocalPosition: {x: 0, y: 0, z: -15.25}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1311898487649993133}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -17.536146, y: 2.83}
@@ -74,6 +75,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dice: {fileID: 11400000, guid: 09f2707c94dc82f44b640b67728e12a2, type: 2}
+--- !u!114 &1256545570061497994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6698412074942037657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18f87acc4155f1141a3874dc85e4d350, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6723486928011288355
 GameObject:
   m_ObjectHideFlags: 0

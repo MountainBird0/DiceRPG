@@ -14,6 +14,8 @@ public class SpawnManager : MonoBehaviour
     private string ObjectName;
     private List<GameObject> spawnPoints = new List<GameObject>();
 
+    private int spawnCount = 0;
+
     /**********************************************************
     * 설명 : 게임 시작과 동시에 싱글톤을 구성
     ***********************************************************/
@@ -67,9 +69,10 @@ public class SpawnManager : MonoBehaviour
         {
             var prefab = ObjectPoolManager.instance.GetObject(ObjectName);
             prefab.transform.position = spawnPoints[i].transform.position;
-         
+            spawnCount++;
 
             Debug.Log($"[SpawnManager] : {spawnPoints[i].transform.position}소환");
         }
     }
+
 }

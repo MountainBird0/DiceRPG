@@ -21565,6 +21565,58 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -305
       objectReference: {fileID: 0}
+    - target: {fileID: 8942327925259475265, guid: b5359163421b34643bfbaa4950fee6af, type: 3}
+      propertyPath: poolData.Array.size
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942327925259475265, guid: b5359163421b34643bfbaa4950fee6af, type: 3}
+      propertyPath: poolData.Array.data[11].count
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942327925259475265, guid: b5359163421b34643bfbaa4950fee6af, type: 3}
+      propertyPath: poolData.Array.data[12].count
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942327925259475265, guid: b5359163421b34643bfbaa4950fee6af, type: 3}
+      propertyPath: poolData.Array.data[13].count
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942327925259475265, guid: b5359163421b34643bfbaa4950fee6af, type: 3}
+      propertyPath: poolData.Array.data[14].count
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942327925259475265, guid: b5359163421b34643bfbaa4950fee6af, type: 3}
+      propertyPath: poolData.Array.data[15].count
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942327925259475265, guid: b5359163421b34643bfbaa4950fee6af, type: 3}
+      propertyPath: poolData.Array.data[16].count
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942327925259475265, guid: b5359163421b34643bfbaa4950fee6af, type: 3}
+      propertyPath: poolData.Array.data[11].prefab
+      value: 
+      objectReference: {fileID: 5553308759672666898, guid: 87d406d56d91a4947bbb1b544eae9c2e, type: 3}
+    - target: {fileID: 8942327925259475265, guid: b5359163421b34643bfbaa4950fee6af, type: 3}
+      propertyPath: poolData.Array.data[12].prefab
+      value: 
+      objectReference: {fileID: 6698412074942037657, guid: 7b90be0c85bcd0047a106cce5592f0a9, type: 3}
+    - target: {fileID: 8942327925259475265, guid: b5359163421b34643bfbaa4950fee6af, type: 3}
+      propertyPath: poolData.Array.data[13].prefab
+      value: 
+      objectReference: {fileID: 5468346486310196511, guid: 7a342d4cdace59b4a93bdefb01efb580, type: 3}
+    - target: {fileID: 8942327925259475265, guid: b5359163421b34643bfbaa4950fee6af, type: 3}
+      propertyPath: poolData.Array.data[14].prefab
+      value: 
+      objectReference: {fileID: 5468346486310196511, guid: 93e6433625d22fc489f31b0fa0f00f9a, type: 3}
+    - target: {fileID: 8942327925259475265, guid: b5359163421b34643bfbaa4950fee6af, type: 3}
+      propertyPath: poolData.Array.data[15].prefab
+      value: 
+      objectReference: {fileID: 5468346486310196511, guid: d48f5a0d520574a459b05df508e475ae, type: 3}
+    - target: {fileID: 8942327925259475265, guid: b5359163421b34643bfbaa4950fee6af, type: 3}
+      propertyPath: poolData.Array.data[16].prefab
+      value: 
+      objectReference: {fileID: 5468346486310196511, guid: 403cd2514e16bd74097b641d0cc52419, type: 3}
     - target: {fileID: 8942327925810966923, guid: b5359163421b34643bfbaa4950fee6af, type: 3}
       propertyPath: m_Name
       value: GameManager

@@ -65,7 +65,13 @@ public class LivingEntity : MonoBehaviour, IAttackable
         {
             onDeath();
         }
+        int ranNum = UnityEngine.Random.Range(1, 7);
+        string name = "Dice"+ranNum.ToString();
 
+        var dice = ObjectPoolManager.instance.GetObject(name);
+        Vector3 dropPos = transform.position;
+        dropPos.y = transform.position.y + 1;
+        dice.transform.position = dropPos;
         isDead = true;
     }
 

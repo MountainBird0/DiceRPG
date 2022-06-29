@@ -20,6 +20,8 @@ public class MonsterSpawner : MonoBehaviour
         {
             SpawnManager.instance.Spawning();
         }
+
+
     }
 
     IEnumerator SlowSpawn()

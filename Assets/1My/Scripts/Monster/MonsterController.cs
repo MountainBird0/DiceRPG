@@ -82,6 +82,8 @@ public class MonsterController : MonoBehaviour
     public GameObject hpBar;
     public GameObject ground;
 
+    private bool isDie = false;
+
     void Awake()
     {
         animator = GetComponent<Animator>();
@@ -108,25 +110,36 @@ public class MonsterController : MonoBehaviour
         hpBar.transform.rotation = Camera.main.transform.rotation;
         ground.transform.rotation =  Camera.main.transform.rotation;
 
-        if (curHp != monsterEntity.currentHealth)
+        
+
+        if( curHp <= 0 && !isDie) 
         {
-            animator.SetTrigger("Damaged");
-            UpdateMonHp();
-            curHp = monsterEntity.currentHealth;
+            currentStatus = Status.Die;
+            isDie = true;
+        }
+        else
+        {
+            if (curHp != monsterEntity.currentHealth)
+            {
+                animator.SetTrigger("Damaged");
+                UpdateMonHp();
+                curHp = monsterEntity.currentHealth;
+            }
+
+            animator.SetFloat("Speed", agent.velocity.magnitude);
+
+            //if (currentStatus != Status.GameOver && player == null)
+            //{
+            //    CurrentStats = Status.GameOver;
+            //    return;
+            //}
+            if (target != null)
+            {
+                targetDistance = Vector3.Distance(transform.position, target.transform.position);
+            }
         }
         
 
-        animator.SetFloat("Speed", agent.velocity.magnitude);
-
-        //if (currentStatus != Status.GameOver && player == null)
-        //{
-        //    CurrentStats = Status.GameOver;
-        //    return;
-        //}
-        if (target != null)
-        {
-            targetDistance = Vector3.Distance(transform.position, target.transform.position);
-        }
 
         switch (currentStatus)
         {
@@ -192,9 +205,20 @@ public class MonsterController : MonoBehaviour
 
     private void UpdateDie()
     {
+        Debug.Log("[MonsterController]UpdateDie 이거들어감");
+        CurrentStats = Status.GameOver;
         agent.isStopped = true;
+        monsterEntity.Die();
         animator.SetTrigger("Die");
         StartCoroutine(SetAct());
+    }
+
+    IEnumerator SetAct()
+    {
+        yield return new WaitForSeconds(2f);
+        
+        this.gameObject.SetActive(false);
+
     }
 
     private void Hit()
@@ -213,22 +237,7 @@ public class MonsterController : MonoBehaviour
         //weapon.ExecuteAttack(gameObject, player.gameObject);
     }
 
-    public void Die()
-    {
-        
-        
-        animator.SetTrigger("Die");
-        StartCoroutine(SetAct());
-    }
 
-
-
-    IEnumerator SetAct()
-    {
-        yield return new WaitForSeconds(2f);
-        this.gameObject.SetActive(false);
-
-    }
 
     public void UpdateMonHp()
     {
