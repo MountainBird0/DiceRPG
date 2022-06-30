@@ -16,7 +16,6 @@ public class PlayerCollision : MonoBehaviour
             string EnemyName = collision.collider.gameObject.name;
             EnemyName = EnemyName.Replace("(Clone)", "");
             SpawnManager.instance.GetNameOfPrefab(EnemyName + "_B");
-            Debug.Log($"[PlayerCollision] : 마을에서 {EnemyName}과 충돌");
             collision.gameObject.SetActive(false);
             GameManager.instance.MoveBattleField1();
         }
