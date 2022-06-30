@@ -21567,7 +21567,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8942327925259475265, guid: b5359163421b34643bfbaa4950fee6af, type: 3}
       propertyPath: poolData.Array.size
-      value: 17
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 8942327925259475265, guid: b5359163421b34643bfbaa4950fee6af, type: 3}
       propertyPath: poolData.Array.data[11].count
@@ -21594,6 +21594,14 @@ PrefabInstance:
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8942327925259475265, guid: b5359163421b34643bfbaa4950fee6af, type: 3}
+      propertyPath: poolData.Array.data[17].count
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942327925259475265, guid: b5359163421b34643bfbaa4950fee6af, type: 3}
+      propertyPath: poolData.Array.data[18].count
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942327925259475265, guid: b5359163421b34643bfbaa4950fee6af, type: 3}
       propertyPath: poolData.Array.data[11].prefab
       value: 
       objectReference: {fileID: 5553308759672666898, guid: 87d406d56d91a4947bbb1b544eae9c2e, type: 3}
@@ -21617,6 +21625,14 @@ PrefabInstance:
       propertyPath: poolData.Array.data[16].prefab
       value: 
       objectReference: {fileID: 5468346486310196511, guid: 403cd2514e16bd74097b641d0cc52419, type: 3}
+    - target: {fileID: 8942327925259475265, guid: b5359163421b34643bfbaa4950fee6af, type: 3}
+      propertyPath: poolData.Array.data[17].prefab
+      value: 
+      objectReference: {fileID: 5615594457370384491, guid: 0dd50770584f4a94983fee4be3e8eac4, type: 3}
+    - target: {fileID: 8942327925259475265, guid: b5359163421b34643bfbaa4950fee6af, type: 3}
+      propertyPath: poolData.Array.data[18].prefab
+      value: 
+      objectReference: {fileID: 8879817325534996111, guid: e406dcb0f4f288643864c4a79f9bcb46, type: 3}
     - target: {fileID: 8942327925810966923, guid: b5359163421b34643bfbaa4950fee6af, type: 3}
       propertyPath: m_Name
       value: GameManager

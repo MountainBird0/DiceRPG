@@ -3155,6 +3155,7 @@ MonoBehaviour:
   rubyAttack: {fileID: 11400000, guid: f2b8f50677addd348914ffcf68f98261, type: 2}
   groundSlap: {fileID: 11400000, guid: c19436835a7534849bff34c138ae1e41, type: 2}
   lineShot: {fileID: 11400000, guid: 17ddc593a3a4061488485cdb9e0e1157, type: 2}
+  iceAttack: {fileID: 11400000, guid: 2f8cf4c0628f7434abbd691e1fa3e51a, type: 2}
 --- !u!114 &574463350
 MonoBehaviour:
   m_ObjectHideFlags: 0

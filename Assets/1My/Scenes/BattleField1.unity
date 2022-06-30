@@ -16850,37 +16850,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6747788411508787032, guid: d878d2b3b3820354d8afad1f266cfab7, type: 3}
   m_PrefabInstance: {fileID: 1932055482}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1935050357
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1935050358}
-  m_Layer: 0
-  m_Name: BattleStartZone
-  m_TagString: StartPoint
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1935050358
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1935050357}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.65, y: 122.26, z: -6.1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1936990283
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18456,3 +18425,60 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 451562, guid: 7902fdc8e019c4e94bd173cf9dde085a, type: 3}
   m_PrefabInstance: {fileID: 2124511824}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &421540616219350187
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 421540618153611997, guid: f23ec44065698bf488def37df768cffd, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 421540618153611997, guid: f23ec44065698bf488def37df768cffd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 421540618153611997, guid: f23ec44065698bf488def37df768cffd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 122.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 421540618153611997, guid: f23ec44065698bf488def37df768cffd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 421540618153611997, guid: f23ec44065698bf488def37df768cffd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 421540618153611997, guid: f23ec44065698bf488def37df768cffd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 421540618153611997, guid: f23ec44065698bf488def37df768cffd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 421540618153611997, guid: f23ec44065698bf488def37df768cffd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 421540618153611997, guid: f23ec44065698bf488def37df768cffd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 421540618153611997, guid: f23ec44065698bf488def37df768cffd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 421540618153611997, guid: f23ec44065698bf488def37df768cffd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 421540618153611998, guid: f23ec44065698bf488def37df768cffd, type: 3}
+      propertyPath: m_Name
+      value: BattleStartZone
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f23ec44065698bf488def37df768cffd, type: 3}

@@ -21,7 +21,18 @@ public class PlayerCollision : MonoBehaviour
             GameManager.instance.MoveBattleField();
         }
 
-        if (collision.collider.CompareTag("Portal"))
+        if (collision.collider.CompareTag("TownMonsterBeach"))
+        {
+            string EnemyName = collision.collider.gameObject.name;
+            EnemyName = EnemyName.Replace("(Clone)", "");
+            SpawnManager.instance.GetNameOfPrefab(EnemyName + "_B");
+            Debug.Log($"[PlayerCollision] : 마을에서 {EnemyName}과 충돌");
+            collision.gameObject.SetActive(false);
+            GameManager.instance.MoveBattleField();
+        }
+
+
+            if (collision.collider.CompareTag("Portal"))
         {
             GameManager.instance.MoveTown();
         }
@@ -34,11 +45,24 @@ public class PlayerCollision : MonoBehaviour
 
         if (collision.collider.CompareTag("HealZone"))
         {
+            var healEffect = ObjectPoolManager.instance.GetObject("HealLoop");
+            healEffect.transform.position = transform.position;
+            StartCoroutine(EffectFalse(healEffect));
+
             LivingEntity life = gameObject.GetComponent<LivingEntity>();
-            life.currentHealth += 200;
+            life.RestoreHealth(200);
             UiManager.instance.UpdatePlayerHp(life.currentHealth, life.maxHealth);
-            collision.gameObject.SetActive(false);
+            
         }
+
+        IEnumerator EffectFalse(GameObject effect)
+        {
+            yield return new WaitForSeconds(1f);
+            collision.gameObject.SetActive(false);
+            effect.SetActive(false);
+        }
+
+
 
         // 아이템 관련
         if (collision.collider.CompareTag("Item"))

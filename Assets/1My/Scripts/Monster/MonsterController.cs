@@ -110,8 +110,6 @@ public class MonsterController : MonoBehaviour
         hpBar.transform.rotation = Camera.main.transform.rotation;
         ground.transform.rotation =  Camera.main.transform.rotation;
 
-        
-
         if( curHp <= 0 && !isDie) 
         {
             currentStatus = Status.Die;
@@ -139,8 +137,6 @@ public class MonsterController : MonoBehaviour
             }
         }
         
-
-
         switch (currentStatus)
         {
             case Status.Idle:
@@ -243,6 +239,5 @@ public class MonsterController : MonoBehaviour
     {
         Debug.Log("[MonsterHealth] hp바 업데이트");
         hpBar.transform.localScale = new Vector3(1 * (monsterEntity.currentHealth / monsterEntity.maxHealth), 1, 1);
-
     }
 }

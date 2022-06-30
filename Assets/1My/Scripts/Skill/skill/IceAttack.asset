@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04fda907482b40c469252d493e112f4c, type: 3}
+  m_Name: IceAttack
+  m_EditorClassIdentifier: 
+  coolDown: 2
+  attackRange: 2
+  minDamage: 10
+  maxDamage: 20
+  radius: 2
+  effectPrefab: {fileID: 2451346544826060524, guid: 9f178908ee9e4614eb8971bf162b0bfe, type: 3}
+  effectDuration: 5

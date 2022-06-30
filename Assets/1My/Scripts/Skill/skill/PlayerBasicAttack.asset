@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: PlayerBasicAttack
   m_EditorClassIdentifier: 
   coolDown: 2
-  attackRange: 0
-  minDamage: 2
-  maxDamage: 3
+  attackRange: 2
+  minDamage: 300
+  maxDamage: 300
   effectPrefab: {fileID: 3059113113518996287, guid: 4903480d2542380409059a55814f40fd, type: 3}
   effectDuration: 2
   range: {x: 1, y: 1, z: 1}
-  dir: {x: 0, y: 0, z: 0, w: 0}
-  startPoint: {x: 0, y: 0, z: 0}
+  dir: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  startPoint: {x: 3.3750455, y: 122.24377, z: -15.496394}

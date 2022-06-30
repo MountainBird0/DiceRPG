@@ -13,7 +13,7 @@ public class BasicAttackSkill : AttackDefinition
     public GameObject effectPrefab;
     public float effectDuration;
 
-    public Vector3 range = new Vector3(1, 1, 1);
+    public Vector3 range = new Vector3(2, 2, 2);
     public Quaternion dir;
 
     public Vector3 startPoint;
@@ -29,7 +29,7 @@ public class BasicAttackSkill : AttackDefinition
         var go = Instantiate(effectPrefab, position, dir);
         Destroy(go, effectDuration);
 
-        startPoint += caster.transform.forward * 2;
+        startPoint = go.transform.position;
         var cols = Physics.OverlapBox(startPoint, range);
         foreach (var col in cols)
         {

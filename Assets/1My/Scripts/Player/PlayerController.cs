@@ -43,13 +43,14 @@ public class PlayerController : MonoBehaviour //LivingEntity
 
         playerEntity = GetComponent<LivingEntity>();
 
-        curHp = playerEntity.currentHealth;
+        
         
     }
 
 
     private void Start()
     {
+        curHp = playerEntity.currentHealth;
         playerController.enabled = true;
     }
 
@@ -64,7 +65,7 @@ public class PlayerController : MonoBehaviour //LivingEntity
     ***********************************************************/
     private void Update()
     {
-        if (curHp != playerEntity.currentHealth)
+        if (curHp > playerEntity.currentHealth)
         {
             if(!isSuperArmor)
             {
@@ -119,17 +120,17 @@ public class PlayerController : MonoBehaviour //LivingEntity
     public void BasicAttack()
     {
         playerAnimator.SetTrigger("Attack");
-        basicAttack.Fire(gameObject, transform.position, 10);
+        basicAttack.Fire(gameObject, transform.position, 8);
     }
 
-    public CircleRangeSkill rubyAttack;
+    public CircleRangeSkill rubyAttack; // »¡°­ 1
     public void RubyAttack()
     {
         playerAnimator.SetTrigger("Skill1");
         rubyAttack.Fire(gameObject, transform.position, 8);
     }
 
-    public CircleRangeSkill groundSlap;
+    public CircleRangeSkill groundSlap; // »¡°­ 2
     public void GroundSlap()
     {
         isSuperArmor = true;
@@ -157,13 +158,20 @@ public class PlayerController : MonoBehaviour //LivingEntity
         isSuperArmor=false;
     }
 
-    public StartPlayerSkill lineShot;
+    public StartPlayerSkill lineShot; // ÆÄ¶û 1
     public void LineShot()
     {
         Debug.Log("[PlayerController]ÇÃ·¹ÀÌ¾î ½ºÅ³2»ç¿ë");
         //DrawRangeLineShot();
         lineShot.Fire(gameObject, transform.position, 8);
     }
+
+    public CircleRangeSkill iceAttack;
+    public void IceAttack()
+    {
+        iceAttack.Fire(gameObject, transform.position, 8);
+    }
+
     //public void DrawRangeLineShot()
     //{
     //    playerSkillRange.SetPosition(0, transform.position);

@@ -54,6 +54,10 @@ public class LivingEntity : MonoBehaviour, IAttackable
             return;
         }
         currentHealth += newHealth;
+        //if(currentHealth > maxHealth)
+        //{
+        //    currentHealth = maxHealth;
+        //}
     }
 
     /**********************************************************

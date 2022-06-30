@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MonsterWraithController : LivingEntity
+public class MonsterWraithController : MonoBehaviour
 {
     public enum Status
     {
@@ -18,6 +18,7 @@ public class MonsterWraithController : LivingEntity
         Attack,
         Charging,
         Spin,
+        Die,
         GameOver,
     }
 
@@ -59,6 +60,11 @@ public class MonsterWraithController : LivingEntity
                     agent.isStopped = true;
                     break;
 
+                case Status.Die:
+                    timer = 0f;
+                    agent.isStopped = true;
+                    break;
+
                 case Status.Spin:
                     agent.isStopped = true;
                     break;
@@ -97,12 +103,20 @@ public class MonsterWraithController : LivingEntity
 
     private float curHp;
 
+    private LivingEntity monsterEntity;
+
+    public GameObject hpBar;
+    public GameObject ground;
+
+    private bool isDie = false;
+
     void Awake()
     {
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         gauge.SetActive(false);
-        curHp = currentHealth;
+        monsterEntity = GetComponent<LivingEntity>();
+        curHp = monsterEntity.currentHealth;
     }
 
     private void Start()
@@ -117,10 +131,20 @@ public class MonsterWraithController : LivingEntity
 
     private void Update()
     {
-        if (curHp != currentHealth)
+        hpBar.transform.rotation = Camera.main.transform.rotation;
+        ground.transform.rotation =  Camera.main.transform.rotation;
+
+        if (curHp <= 0 && !isDie)
+        {
+            currentStatus = Status.Die;
+            isDie = true;
+        }
+
+        if (curHp != monsterEntity.currentHealth)
         {
             animator.SetTrigger("Damaged");
-            curHp = currentHealth;
+            UpdateMonHp();
+            curHp = monsterEntity.currentHealth;
         }
 
         animator.SetFloat("Speed", agent.velocity.magnitude);
@@ -151,6 +175,9 @@ public class MonsterWraithController : LivingEntity
                 break;
             case Status.Spin:
                 UpdateSpin();
+                break;
+            case Status.Die:
+                UpdateDie();
                 break;
         }
     }
@@ -270,12 +297,13 @@ public class MonsterWraithController : LivingEntity
         //weapon.ExecuteAttack(gameObject, player.gameObject);
     }
 
-    public override void Die()
+    public void UpdateDie()
     {
-        //base.Die();
         gauge.SetActive(false);
         charging.SetActive(false);
+        CurrentStats = Status.GameOver;
         agent.isStopped = true;
+        monsterEntity.Die();
         animator.SetTrigger("Die");
         StartCoroutine(SetAct());
     }
@@ -284,6 +312,13 @@ public class MonsterWraithController : LivingEntity
     {
         yield return new WaitForSeconds(5f);
         this.gameObject.SetActive(false);
+
+    }
+
+    public void UpdateMonHp()
+    {
+        Debug.Log("[MonsterHealth] hp바 업데이트");
+        hpBar.transform.localScale = new Vector3(1 * (monsterEntity.currentHealth / monsterEntity.maxHealth), 1, 1);
 
     }
 }

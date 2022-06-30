@@ -22,7 +22,8 @@ public class SkillDiceManager : MonoBehaviour
 
     public int[] skillActives = { 0, 0 };
 
-    private int num;
+    private int num1;
+    private int num2;
 
     private void OnValidate()
     {
@@ -47,11 +48,6 @@ public class SkillDiceManager : MonoBehaviour
         skillDice3.Dice = InventoryManager.instance.intactDice3[num];
     }
 
-    public void RemoveDice()
-    {
-        //= null;
-    }
-
     /**********************************************************
     * 설명 : 버튼의 이미지를 변경
     ***********************************************************/
@@ -71,6 +67,8 @@ public class SkillDiceManager : MonoBehaviour
                 skillbuttons[slotNum].GetComponent<Image>().sprite =
                     Resources.Load("Skill/GroundSlam", typeof(Sprite)) as Sprite;
             }
+
+            num1 = diceNum;
         }
 
         if (slotNum == 1)
@@ -81,8 +79,13 @@ public class SkillDiceManager : MonoBehaviour
                 skillbuttons[slotNum].GetComponent<Image>().sprite =
                     Resources.Load("Skill/IceShot", typeof(Sprite)) as Sprite;
             }
+            if (diceNum == 3 || diceNum == 4)
+            {
+                skillbuttons[slotNum].GetComponent<Image>().sprite =
+                    Resources.Load("Skill/IceGround", typeof(Sprite)) as Sprite;
+            }
+            num2 = diceNum;
         }
-        num = diceNum;
     }
 
     public void OnClickSkillSlot1()
@@ -90,11 +93,11 @@ public class SkillDiceManager : MonoBehaviour
         if (skillActives[0] == 1)
         {
             var player = GameObject.FindGameObjectWithTag("Player");
-            if (num == 1 || num == 2)
+            if (num1 == 1 || num1 == 2)
             {
                 player.GetComponent<PlayerController>().RubyAttack();
             }
-            if (num == 3 || num == 4)
+            if (num1 == 3 || num1 == 4)
             {
                 player.GetComponent<PlayerController>().GroundSlap();
             }
@@ -108,10 +111,16 @@ public class SkillDiceManager : MonoBehaviour
         if (skillActives[1] == 1)
         {
             var player = GameObject.FindGameObjectWithTag("Player");
-            if (num == 1 || num == 2)
+            if (num2 == 1 || num2 == 2)
             {
                 player.GetComponent<PlayerController>().LineShot();
             }
+            if (num2 == 3 || num2 == 4)
+            {
+                player.GetComponent<PlayerController>().IceAttack();
+            }
+
+            
 
             skillbuttons[1].GetComponent<Image>().sprite =
                     Resources.Load("Skill/BlueIcon", typeof(Sprite)) as Sprite;
