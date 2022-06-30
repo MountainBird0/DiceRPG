@@ -15,11 +15,6 @@ public class FollowTarget : MonoBehaviour
 
     bool check;
 
-    private void Awake()
-    {
-
-    }
-
     /**********************************************************
     * 설명 : 카메라가 플레이어를 따라다니도록 함
     ***********************************************************/
@@ -30,8 +25,8 @@ public class FollowTarget : MonoBehaviour
             if (target == null)
             {
                 target = GameObject.FindGameObjectWithTag("Player");
-                transform.position = new Vector3(target.transform.position.x * 1.25f,
-                    target.transform.position.y * 3.7f, target.transform.position.z);
+                transform.position = new Vector3(target.transform.position.x -26.5f,
+                    target.transform.position.y +18f, target.transform.position.z - 15.6f);
 
                 return;
             }
@@ -51,3 +46,6 @@ public class FollowTarget : MonoBehaviour
         }
     }
 }
+
+//transform.position = new Vector3(target.transform.position.x -10f,
+//                    target.transform.position.y +7f, target.transform.position.z - 6f);

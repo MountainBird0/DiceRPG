@@ -18,7 +18,7 @@ public class PlayerCollision : MonoBehaviour
             SpawnManager.instance.GetNameOfPrefab(EnemyName + "_B");
             Debug.Log($"[PlayerCollision] : 마을에서 {EnemyName}과 충돌");
             collision.gameObject.SetActive(false);
-            GameManager.instance.MoveBattleField();
+            GameManager.instance.MoveBattleField1();
         }
 
         if (collision.collider.CompareTag("TownMonsterBeach"))
@@ -27,12 +27,23 @@ public class PlayerCollision : MonoBehaviour
             EnemyName = EnemyName.Replace("(Clone)", "");
             SpawnManager.instance.GetNameOfPrefab(EnemyName + "_B");
             Debug.Log($"[PlayerCollision] : 마을에서 {EnemyName}과 충돌");
+            //collision.gameObject.SetActive(false);
+            Destroy(collision.gameObject);
+            GameManager.instance.MoveBattleFieldBeach();
+        }
+
+        if (collision.collider.CompareTag("TownBoss"))
+        {
+            string EnemyName = collision.collider.gameObject.name;
+            EnemyName = EnemyName.Replace("(Clone)", "");
+            SpawnManager.instance.GetNameOfPrefab(EnemyName + "_B");
+            Debug.Log($"[PlayerCollision] : 마을에서 {EnemyName}과 충돌");
             collision.gameObject.SetActive(false);
-            GameManager.instance.MoveBattleField();
+            GameManager.instance.MoveBattleFieldBoss();
         }
 
 
-            if (collision.collider.CompareTag("Portal"))
+        if (collision.collider.CompareTag("Portal"))
         {
             GameManager.instance.MoveTown();
         }
@@ -52,7 +63,7 @@ public class PlayerCollision : MonoBehaviour
             LivingEntity life = gameObject.GetComponent<LivingEntity>();
             life.RestoreHealth(200);
             UiManager.instance.UpdatePlayerHp(life.currentHealth, life.maxHealth);
-            
+
         }
 
         IEnumerator EffectFalse(GameObject effect)
@@ -72,7 +83,7 @@ public class PlayerCollision : MonoBehaviour
             InventoryManager.instance.GetDice(itemName);
             collision.gameObject.SetActive(false);
         }
-    }    
+    }
 
 
 }

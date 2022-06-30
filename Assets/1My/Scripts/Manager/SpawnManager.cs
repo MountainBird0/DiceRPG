@@ -75,4 +75,20 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    /**********************************************************
+    * 설명 : 보스몬스터 타운에 스폰함
+    ***********************************************************/
+    public void BossSpawning()
+    {
+        //var spawnPoint = GameObject.FindGameObjectWithTag("BossZone");
+        Vector3 spawnPoint = new Vector3(-9.6f, 2.14f, -22.11f);
+        Debug.Log($"[SpawnManager]포인트위치{ spawnPoint}");
+        var boss = ObjectPoolManager.instance.GetObject("Wraith_Boss");
+        boss.transform.position = spawnPoint;
+        Debug.Log($"[SpawnManager]보스위치{boss.transform.position}");
+
+
+
+    }
+
 }

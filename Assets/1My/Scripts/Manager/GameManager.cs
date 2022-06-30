@@ -7,14 +7,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public SkillDiceManager skillDiceManager;
     public static GameManager instance;
+
     private bool bossAlive = false;
+    private int clearCount = 0;
 
     private Vector3 lastTowntransform;
+
+    public Image changeScene;
 
 
     /**********************************************************
@@ -37,6 +42,29 @@ public class GameManager : MonoBehaviour
         //ObjectPoolManager.instance.GetObject("Player");
     }
 
+    //public IEnumerator FadeIn(float time)
+    //{
+    //    Color color = image.color;
+    //    while (color.a > 0f)
+    //    {
+    //        color.a -= Time.deltaTime / time;
+    //        image.color = color;
+    //        yield return null;
+    //    }
+    //}
+
+    //public IEnumerator FadeOut(float time)
+    //{
+    //    Color color = image.color;
+    //    while (color.a < 1f)
+    //    {
+    //        color.a += Time.deltaTime / time;
+    //        image.color = color;
+    //        yield return null;
+    //    }
+    //}
+
+
     /**********************************************************
     * 설명 : 새로운 게임을 시작함
     ***********************************************************/
@@ -44,19 +72,42 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("Town");
         UiManager.instance.SetPlayerHp(true);
-        StartCoroutine(Delay());
-     
+        StartCoroutine(Delay());    
     }
 
     /**********************************************************
     * 설명 : 타운 몬스터와 만났을 때 배틀필드로 이동
     ***********************************************************/
-    public void MoveBattleField()
+    public void MoveBattleField1()
     {
         skillDiceManager.GetRanDice();
         var prefab = GameObject.FindGameObjectWithTag("Player");
         prefab.GetComponent<CharacterController>().enabled = false;
         SceneManager.LoadScene("BattleField1");
+        UiManager.instance.SetPlayerAttack(true);
+        StartCoroutine(GoBattleField());
+    }
+    /**********************************************************
+    * 설명 : 타운 몬스터와 만났을 때 해변으로 이동
+    ***********************************************************/
+    public void MoveBattleFieldBeach()
+    {
+        skillDiceManager.GetRanDice();
+        var prefab = GameObject.FindGameObjectWithTag("Player");
+        prefab.GetComponent<CharacterController>().enabled = false;
+        SceneManager.LoadScene("BattleFieldBeach");
+        UiManager.instance.SetPlayerAttack(true);
+        StartCoroutine(GoBattleField());
+    }
+    /**********************************************************
+    * 설명 : 보스와 만났을 때 보스방으로 이동
+    ***********************************************************/
+    public void MoveBattleFieldBoss()
+    {
+        skillDiceManager.GetRanDice();
+        var prefab = GameObject.FindGameObjectWithTag("Player");
+        prefab.GetComponent<CharacterController>().enabled = false;
+        SceneManager.LoadScene("BattleFieldBoss");
         UiManager.instance.SetPlayerAttack(true);
         StartCoroutine(GoBattleField());
     }
@@ -66,13 +117,18 @@ public class GameManager : MonoBehaviour
     ***********************************************************/
     public void MoveTown()
     {
+        clearCount++;
+        if(clearCount == 1)
+        {
+            SpawnManager.instance.BossSpawning();
+        }
+
         var prefab = GameObject.FindGameObjectWithTag("Player");
         prefab.GetComponent<CharacterController>().enabled = false;
         SceneManager.LoadScene("Town");
         UiManager.instance.SetPlayerAttack(false);
         StartCoroutine(GoTown());
     }
-
 
     /**********************************************************
     * 설명 : 씬 전환하는 동안 나올 화면

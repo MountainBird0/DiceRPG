@@ -20,6 +20,9 @@ TagManager:
   - Drag
   - PowerZone
   - HealZone
+  - TownMonsterBeach
+  - TownBoss
+  - BossZone
   layers:
   - Default
   - TransparentFX

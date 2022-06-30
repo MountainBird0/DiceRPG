@@ -9,6 +9,7 @@ using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
 {
+
     void Start()
     {
         StartCoroutine(SlowSpawn());
@@ -20,8 +21,6 @@ public class MonsterSpawner : MonoBehaviour
         {
             SpawnManager.instance.Spawning();
         }
-
-
     }
 
     IEnumerator SlowSpawn()
